@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-image: url('/public/image/background.PNG');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+canvas {
+  display: block;
+  margin: 20px auto;
+}
+
+#drop-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+#game-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 600px;
+    text-align: center;
+    gap: 10px;
+}
+
+#board {
+    background-color: rgb(34, 31, 110);
+    grid-column: 2/-1;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#robux-earned {
+    color: white;
+}
+
+#controls {
+    grid-column: 1/2;
+    background-color: rgb(34, 31, 110);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+
+}
+
+label {
+    color: white;
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 10px;
+}
+
+#minesss {
+    transition: 0.4s ease;
+}
+
+#minesss:hover {
+    transform: scale(1.1);
+}
+
+::placeholder {
+    color: white;
+}
+
+input {
+    width: 80%;
+    max-width: 200px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    height: 40px;
+    background-color: rgb(54, 51, 150);
+    color: white;
+    text-align: center;
+    margin: 10px 0;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    margin-top: 15px;
+    width: 80%;
+    max-width: 200px;
+    height: 40px;
+    border: none;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: rgb(0, 0, 254);
+    color: white;
+    border-radius: 15px;
+    transition: background-color 0.5s;
+}
+
+button:hover {
+    background-color: rgb(10, 66, 244);
+}
+
+#textlogo {
+    color: #65a1ef;
+    font-weight: 750;
+    font-size: 2rem;
+    transition: 0.4s ease;
+    margin: 10px 0;
+}
+
+#textlogo:hover {
+    transform: scale(1.1);
+}
+
+.pegs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.peg {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 0 19px 18px;
+}
+
+.multipliers {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 28px;
+    width: 80%;
+    padding: 10px 0;
+}
+
+.multiplier {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-left: 4px;
+}
+
+.multiplier:nth-child(1) { background-color: #3E00FF; } 
+.multiplier:nth-child(2) { background-color: #00A6FF; } 
+.multiplier:nth-child(3) { background-color: #FF0077; } 
+.multiplier:nth-child(4) { background-color: #FF0033; } 
+.multiplier:nth-child(5) { background-color: #FF8C00; } 
+.multiplier:nth-child(6) { background-color: #FFC300; } 
+.multiplier:nth-child(7) { background-color: #FF8C00; }
+.multiplier:nth-child(8) { background-color: #FF0033; } 
+.multiplier:nth-child(9) { background-color: #FF0077; } 
+.multiplier:nth-child(10) { background-color: #00A6FF; } 
+.multiplier:nth-child(11) { background-color: #3E00FF; }
+
+/* Media Queries para dispositivos móviles */
+
+@media (max-width: 1024px) {
+
+    canvas {
+        width: 90%;
+      display: block;
+      margin: 20px auto;
+    }
+    .multiplier {
+        width: 90%;
+        height: 25px;
+        font-size: 0.8rem;
+        
+    }
+    .multipliers {
+   
+        bottom: 50px;
+        width: 90%;
+    }
+
+    #game-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    #board, #controls {
+        grid-column: 1/-1;
+        width: 100%;
+    }
+
+    #board {
+        height: auto;
+    }
+
+    #controls {
+        margin-top: 20px;
+        height: 220px;
+    }
+   
+   
+}
+
+@media (max-width: 768px) {
+
+    canvas {
+        width: 80%;
+      display: block;
+      margin: 20px auto;
+    }
+
+    #textlogo {
+        font-size: 1.5rem;
+    }
+
+    label {
+        font-size: 1.5rem;
+    }
+
+    input, button {
+        width: 70%;
+    }
+
+    .multiplier {
+        width: 40px;
+        height: 25px;
+        font-size: 0.8rem;
+        
+    }
+    
+    
+}
+
+@media (max-width: 480px) {
+
+    canvas {
+        width: 50%;
+      display: block;
+      margin: 20px auto;
+    }
+
+    #textlogo {
+        font-size: 1.2rem;
+    }
+
+    label {
+        font-size: 1.2rem;
+    }
+
+    input, button {
+        width: 100%;
+    }
+
+    .multiplier {
+        width: 35px;
+        height: 20px;
+        font-size: 0.4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    canvas {
+        width: 90%;
+        height: 320px;
+      display: block;
+      margin: 2px auto;
+    }
+
+    .multipliers {
+        bottom: 20px;
+        bottom: 20px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 375px) {
+
+    canvas {
+        width: 550px;
+        height: 600px;
+      display: block;
+      margin: 20px auto;
+    }
+
+    #board {
+        height: auto;
+    }
+
+    #textlogo {
+        font-size: 1rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    input, button {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .multiplier {
+        width: 30px;
+        height: 20px;
+        font-size: 0.4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .multipliers {
+        bottom: 20px;
+        width: 90%;
+    }
+    canvas {
+        width: 90%;
+        height: 290px;
+      display: block;
+      margin: 2px auto;
+    }
+}

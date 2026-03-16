@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/dashboard.css">
+</head>
+<body>
+    <%- include('partials/sidebar') %>
+    
+    <!-- Contenido oculto inicialmente -->
+    <div id="containerrr" style="display: none;">
+        <div class="boxes">
+            <h4>LIVE USERS:</h4>
+            <h3><%- liveUsers %></h3>
+        </div>
+        <br>
+        <div class="boxes">
+            <h4>Total users:</h4>
+            <h3><%- totalUsers %></h3>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('authToken');
+
+        // Mostrar el contenido solo si el token existe
+        if (token) {
+            document.getElementById('containerrr').style.display = 'block';
+        } else {
+            // Redirigir al login si no hay token
+            window.location.href = '/login';
+        }
+    </script>
+</body>
+</html>

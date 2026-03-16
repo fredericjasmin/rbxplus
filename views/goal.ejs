@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/goal.css">
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    <link rel="icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    
+</head>
+<body>
+    <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+
+    <div id="containerrr">
+        <div id="maincontent"> 
+            <div id="maintittle" class="shining-text" data-translate="donated">R$ Donated</div>
+            <div class="marquee-container">
+                <div class="marquee">
+                    <p id="textp" data-translate="live">Here are the Robux we've donated live since the site launched, as we aim to give 100M R$ to everyone.</p>
+                </div>
+            </div>
+
+            <div id="contrbxss" class="shining-text">
+                <h4 id="counterrobux"><%- Math.floor(totalRobuxDonated) %> R$</h4>
+            </div>
+        </div>
+
+        <div id="secondarycontent">
+            <h1 class="h1second" data-translate="section">What is this section?</h1>
+            <h2 class="thirdtext" data-translate="million">This section is a goal for us, as we aim to donate 100 million Robux to many users...</h2> 
+            <h6 class="testprize" data-translate="giving">
+            </h6>
+            <p style="color: white;" data-translate="upload">We will upload content to <a href='https://www.youtube.com/@rbxpluss' target='_blank'>YouTube</a> showing the donations to be transparent with our users</p>
+        </div>
+    </div>  
+
+    <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+    <script>
+
+function formatNumber(number) {
+        return parseInt(number).toLocaleString(); 
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const robuxElement = document.getElementById('counterrobux');
+        const totalRobuxDonated = robuxElement.innerText.match(/\d+/)[0]; 
+        
+        robuxElement.innerText = formatNumber(totalRobuxDonated) + " R$";
+    });
+
+
+        i18next
+            .use(i18nextBrowserLanguageDetector)
+            .init({
+                fallbackLng: 'en',
+                debug: true,
+                resources: {
+                    en: {
+                        translation: {
+                            "donated": "R$ Donated",
+                            "live": "Here are the Robux we've donated live since the site launched, as we aim to give 100M R$ to everyone.",
+                            "section": "What is this section?",
+                            "million": "This section is a goal for us, as we aim to donate 100 million Robux to many users...",
+                            "giving": "We will be giving out rewards based on the milestones we achieve: <br>1M R$ = 100K R$<br>5M R$ = 500K R$<br>10M R$ = 1M R$<br>25M R$ = 2.5M R$<br>50M R$ = 6M R$<br>100M R$ = 15M R$",
+                            "upload": "We will upload content to <a href='https://www.youtube.com/@rbxpluss' target='_blank'>YouTube</a> showing the donations to be transparent with our users"
+                        }
+                    },
+                    es: {
+                        translation: {
+                            "donated": "R$ Donados",
+                            "live": "Aqui estan los robux que hemos donado en vivo desde que se lanzo el sitio, ya que nuestro objetivo es dar 100M R$ a todos.",
+                            "section": "Que es esta seccion?",
+                            "million": "Esta seccion es una meta para nosotros, ya que queremos donar 100 millones de Robux a muchos usuarios...",
+                           "giving": "Estaremos dando recompensas de acuerdo a los R$ donados: <br>1M R$ = 100K R$<br>5M R$ = 500K R$<br>10M R$ = 1M R$<br>25M R$ = 2.5M R$<br>50M R$ = 6M R$<br>100M R$ = 15M R$",
+                            "upload": "Subiremos contenido a <a href='https://www.youtube.com/@rbxpluss' target='_blank'>YouTube</a> mostrando las donaciones para ser transparentes con nuestros usuarios."
+                        }
+                    }
+                }
+            }, function(err, t) {
+                // Actualizar las traducciones
+                updateContent();
+            });
+
+        function updateContent() {
+            document.querySelectorAll('[data-translate]').forEach(function(element) {
+                const key = element.getAttribute('data-translate');
+                element.innerHTML = i18next.t(key);
+            });
+        }
+
+        // Cambiar idioma al hacer clic
+        document.getElementById('change-lang-es').addEventListener('click', function() {
+            i18next.changeLanguage('es', updateContent);
+        });
+
+        document.getElementById('change-lang-en').addEventListener('click', function() {
+            i18next.changeLanguage('en', updateContent);
+        });
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const socket = new WebSocket('ws://rbxplus.com/');
+  
+      // Eventos de conexión, cierre y mensajes
+      socket.onopen = () => {
+          console.log('Connected to WebSocket server');
+      };
+  
+      socket.onclose = () => {
+          console.log('Disconnected from WebSocket server');
+      };
+  
+      socket.onerror = (error) => {
+          console.error('WebSocket error:', error);
+      };
+  });
+  </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J55SK0YRQ8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J55SK0YRQ8');
+</script>
+</body>
+</html>

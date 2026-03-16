@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+  <link rel="stylesheet" href="/public/extra.css">
+  <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+      <%- include('partials/notifications') %>
+        <div id="positiontheui">
+
+          <div id="tasksui">
+            <h2 id="tittle" data-translate="daily">DAILY TASKS</h2>
+            <h2 id="counter">24:00:00</h2>
+
+            <div class="tasks" id="task1">
+              <div class="xdd">
+                <h2 class="tasktit" data-translate="task1">Task 1</h2>
+                <h2 class="description" data-translate="offer1">Complete 1 offer in the day</h2>
+                <h2 class="countertask">0/1</h2>
+              </div>
+              <form action="/tasks/claim" method="POST">
+                <input type="hidden" name="taskId" value="1">
+                <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="claim-btn" disabled>Claim 0.5R$</button>
+              </form>
+            </div>
+
+            <div class="tasks" id="task2">
+              <div class="1t">
+                <h2 class="tasktit" data-translate="task2">Task 2</h2>
+                <h2 class="description" data-translate="offer2">Complete 3 offers in the day</h2>
+                <h2 class="countertask">0/3</h2>
+              </div>
+              <form action="/tasks/claim" method="POST">
+                <input type="hidden" name="taskId" value="2">
+                <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="claim-btn" disabled>Claim 1.5R$</button>
+              </form>
+            </div>
+
+            <div class="tasks" id="task3">
+              <div class="1t">
+                <h2 class="tasktit" data-translate="task3">Task 3</h2>
+                <h2 class="description" data-translate="offer3">Complete 5 offers in the day</h2>
+                <h2 class="countertask">0/5</h2>
+              </div>
+              <form action="/tasks/claim" method="POST">
+                <input type="hidden" name="taskId" value="3">
+                <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="claim-btn" disabled>Claim 3R$</button>
+              </form>
+            </div>
+
+            <div class="tasks" id="task4">
+              <div class="1t">
+                <h2 class="tasktit" data-translate="task4">Task 4</h2>
+                <h2 class="description" data-translate="offer4">Complete 10 offers in the day</h2>
+                <h2 class="countertask">0/10</h2>
+              </div>
+              <form action="/tasks/claim" method="POST">
+                <input type="hidden" name="taskId" value="4">
+                <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="claim-btn" disabled>Claim 5R$</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+
+        <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+        <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+        <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+        <script>
+          i18next
+            .use(i18nextBrowserLanguageDetector)
+            .init({
+              fallbackLng: 'en',
+              debug: true,
+              resources: {
+                en: {
+                  translation: {
+                    "daily": "DAILY TASKS",
+                    "task1": "Task 1",
+                    "offer1": "Complete 1 offer in the day",
+                    "task2": "Task 2",
+                    "offer2": "Complete 3 offers in the day",
+                    "task3": "Task 3",
+                    "offer3": "Complete 5 offers in the day",
+                    "task4": "Task 4",
+                    "offer4": "Complete 10 offers in the day"
+                  }
+                },
+                es: {
+                  translation: {
+                    "daily": "MISIONES",
+                    "task1": "Tarea 1",
+                    "offer1": "Completa 1 oferta del dia",
+                    "task2": "Tarea 2",
+                    "offer2": "Completa 3 ofertas del dia",
+                    "task3": "Tarea 3",
+                    "offer3": "Completa 5 ofertas del dia",
+                    "task4": "Tarea 4",
+                    "offer4": "Completa 10 ofertas del dia"
+                  }
+                }
+              }
+            }, function (err, t) {
+              // Actualizar las traducciones
+              updateContent();
+            });
+
+          function updateContent() {
+            document.querySelectorAll('[data-translate]').forEach(function (element) {
+              const key = element.getAttribute('data-translate');
+              element.innerHTML = i18next.t(key); // Usamos innerHTML para manejar el contenido HTML
+            });
+          }
+
+          // Cambiar idioma al hacer clic
+          document.getElementById('change-lang-es').addEventListener('click', function () {
+            i18next.changeLanguage('es', updateContent);
+          });
+
+          document.getElementById('change-lang-en').addEventListener('click', function () {
+            i18next.changeLanguage('en', updateContent);
+          });
+        </script>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', async () => {
+            document.querySelectorAll('.claim-btn').forEach(button => {
+                button.disabled = true;
+                button.style.opacity = '0.5';
+                button.classList.add('disabled');
+              });
+
+            try {
+              const response = await fetch('/tasks/status');
+              const data = await response.json();
+              const { tasks, timeRemaining } = data;
+
+              var countDownDate = new Date().getTime() + timeRemaining;
+
+              var x = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("counter").innerHTML = hours + ":" +
+                  (minutes < 10 ? "0" + minutes : minutes) + ":" +
+                  (seconds < 10 ? "0" + seconds : seconds);
+
+                if (distance < 0) {
+                  clearInterval(x);
+                  document.getElementById("counter").innerHTML = "EXPIRED";
+                }
+              }, 1000);
+
+              updateTaskStatus('task1', tasks.task1, 1);
+              updateTaskStatus('task2', tasks.task2, 3);
+              updateTaskStatus('task3', tasks.task3, 5);
+              updateTaskStatus('task4', tasks.task4, 10);
+
+            } catch (error) {
+              console.error('Error loading tasks status:', error);
+            }
+          });
+
+          function updateTaskStatus(taskId, task, goal) {
+            const taskElement = document.getElementById(taskId);
+            if (!taskElement) {
+              console.error(`Element for ${taskId} not found`);
+              return;
+            }
+
+            const counterElement = taskElement.querySelector('.countertask');
+            if (counterElement) {
+              counterElement.innerText = `${task.progress}/${goal}`;
+            }
+
+            const claimButton = taskElement.querySelector('.claim-btn');
+            if (claimButton) {
+              if (task.progress >= goal && !task.claimed) {
+                claimButton.disabled = false;
+                claimButton.style.opacity = '1';
+                claimButton.classList.remove('disabled');
+              } else if (task.progress <= goal && !task.completed) {
+                claimButton.style.opacity = '0.5'
+                claimButton.disabled = true;
+                claimButton.classList.add('disabled');
+              } else if (task.progress >= goal && task.completed) {
+                claimButton.disabled = false;
+                claimButton.classList.remove('disabled');
+                if (task.claimed) {
+                  claimButton.style.opacity = '0.5'
+                  claimButton.innerText = 'Claimed'
+                  claimButton.disabled = true;
+                }
+              }
+            }
+          }
+        </script>
+
+</body>
+
+</html>

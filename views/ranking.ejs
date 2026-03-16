@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/ranking.css">
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    <link rel="icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    
+</head>
+<body>
+    <%- include('partials/preload') %>
+    <%- include('partials/navbar')%>
+
+    <div id="containerrr">
+        <div id="maincontent">
+            <div id="maintittle" class="shining-text" data-translate="shiningtext">Daily Users</div>
+            <div class="marquee-container">
+                <div class="marquee">
+                    <p id="textp" data-translate="textp">Users who appear in the daily and weekly top rankings will receive rewards and participate in videos, earning Robux.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="dailyboard">
+            <% if (dailyUsers.length > 0) { %>
+                <% 
+                    dailyUsers.sort((a, b) => b.points - a.points);
+                %>
+                
+                <% if (dailyUsers.length === 3) { %>
+                    <div class="bordx">
+                        <div class="imagecircle"><img src="<%= dailyUsers[1].imageUrl %>" alt="User Image"></div>
+                        <h2><%= dailyUsers[1].username %></h2>
+                        <h4 class="rbxammount"><%= dailyUsers[1].points %> R$</h4>
+                    </div>
+
+                    <div id="boardpopular">
+                        <div class="imagecircle"><img src="<%= dailyUsers[0].imageUrl %>" alt="User Image"></div>
+                        <h2><%= dailyUsers[0].username %></h2>
+                        <h4 class="rbxammount"><%= dailyUsers[0].points %> R$</h4>
+                    </div>
+
+                    <div class="bordx">
+                        <div class="imagecircle"><img src="<%= dailyUsers[2].imageUrl %>" alt="User Image"></div>
+                        <h2><%= dailyUsers[2].username %></h2>
+                        <h4 class="rbxammount"><%= dailyUsers[2].points %> R$</h4>
+                    </div>
+                <% } else { %>
+                    <% dailyUsers.forEach(user => { %>
+                        <div class="bordx">
+                            <div class="imagecircle"><img src="<%= user.imageUrl %>" alt="User Image"></div>
+                            <h2><%= user.username %></h2>
+                            <h4 class="rbxammount"><%= user.points %> R$</h4>
+                        </div>
+                    <% }) %>
+                <% } %>
+            <% } else { %>
+                <p data-translate="nodaily">No daily users available.</p>
+            <% } %>
+        </div>
+        
+        <div id="lastboard">
+            <h2 id="texts" data-translate="texts">Weekly Users</h2>
+            <div id="weeklyboard">
+                <% if (weeklyUsers.length > 0) { %>
+                    <% 
+                        weeklyUsers.sort((a, b) => b.points - a.points); 
+                    %>
+                    <% weeklyUsers.forEach(user => { %>
+                        <div class="weeklyuser">
+                            <div class="imglastboard"><img src="<%= user.imageUrl %>" alt="User Image"> </div>
+                            <h5 id="usertext"><%= user.username %></h5>
+                            <h5><%= user.points %> R$</h5>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p data-translate="noweekly">No weekly users available.</p>
+                <% } %>
+            </div>
+        </div>
+
+        <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+        <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+        <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+        <script>
+           i18next
+             .use(i18nextBrowserLanguageDetector)
+             .init({
+               fallbackLng: 'en',
+               debug: true,
+               resources: {
+                 en: {
+                   translation: {
+                     "shiningtext": "Daily Users",
+                     "textp": "Users who appear in the daily and weekly top rankings will receive rewards and participate in videos, earning Robux.",
+                     "nodaily": "No daily users available.",
+                     "texts": "Weekly Users",
+                     "noweekly": "No weekly users available."
+                   }
+                 },
+                 es: {
+                   translation: {
+                     "shiningtext": "Top Diario",
+                     "textp": "Los usuarios que aparecen en la lista de diario y semanal, recibiran recompensas y podran participar hasta en videos ganando R$",
+                     "nodaily": "No hay usuarios diarios",
+                     "texts": "Top Semanal",
+                     "noweekly": "No hay usuarios semanales",
+                   }
+                 }
+               }
+             }, function(err, t) {
+               // Actualizar las traducciones
+               updateContent();
+             });
+
+            function updateContent() {
+              document.querySelectorAll('[data-translate]').forEach(function(element) {
+                const key = element.getAttribute('data-translate');
+                element.textContent = i18next.t(key);
+              });
+            }
+
+            // Cambiar idioma al hacer clic
+            document.getElementById('change-lang-es').addEventListener('click', function() {
+              i18next.changeLanguage('es', updateContent);
+            });
+
+            document.getElementById('change-lang-en').addEventListener('click', function() {
+              i18next.changeLanguage('en', updateContent);
+            });
+        </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const socket = new WebSocket('ws://rbxplus.com/');
+  
+      // Eventos de conexión, cierre y mensajes
+      socket.onopen = () => {
+          console.log('Connected to WebSocket server');
+      };
+  
+      socket.onclose = () => {
+          console.log('Disconnected from WebSocket server');
+      };
+  
+      socket.onerror = (error) => {
+          console.error('WebSocket error:', error);
+      };
+  });
+  </script>
+    </div>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J55SK0YRQ8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J55SK0YRQ8');
+</script>
+</body>
+</html>

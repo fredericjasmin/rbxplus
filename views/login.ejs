@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/login.css">
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    <link rel="icon" href="/public/image/rrbxplus.png" type="image/png" sizes="800x800">
+    <meta name="description" content="Earn free Robux easily! Complete quick and fun tasks like downloading games or watching videos to start collecting rewards. Get Robux easy for signing up on our website!">
+    <meta property="og:image" content="/public/image/rrbxplus.png">
+    <meta name="title" content="RbxPlus: Earn Free Robux In Few Minutes!">
+    <meta name="keywords" content="rbx plus, rbxplus, rbx, roblox, rbxgum, roblox, Earn Free Robux, Free Robux Sites, Fast Robux, Earn Free Robux, Earn Free Robux Easy, Robux Sites, Free Robux Rewards, Free rbx, Earn Free rbx, Robux Website">
+    <meta name="author" content="Rbx Plus" />
+    <meta name="theme-color" content="#7feffd">
+    <meta property="og:description" content="Earn free Robux easily! Complete quick and fun tasks like downloading games or watching videos to start collecting rewards. Get Robux easy for signing up on our website!">
+    <meta property="og:title" content="RbxPlus: Earn Free Robux In Few Minutes!">
+    <meta name="copyright" content="Rbx Plus" />
+    <meta name="robots" content="index"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    
+</head>
+<body>
+  <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+
+    <div id="container">
+    <div id="login" >
+       <div id="log1"><h1>LOGIN</h1></div> 
+
+       <div id="warn">
+        <h2 id="tittle" data-translate="username">Write your roblox username</h2>
+        <br>
+        <p id="advertise" data-translate="password">Note: We will never ask for your password</p>
+    </div>
+
+       <%- include(`partials/notifications`)%>
+
+        <form id="loginForm" method="post" action="/login" onsubmit="trimUsername()">
+            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+            <input placeholder="Username" name="username" required id="username"> 
+            <button id="okbut"><span>OK</span></button>
+        </form>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+ <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+ <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+ <script>
+    i18next
+      .use(i18nextBrowserLanguageDetector)
+      .init({
+        fallbackLng: 'en',
+        debug: true,
+        resources: {
+          en: {
+            translation: {
+              "username": "Write your roblox username",
+              "password": "Note: We will never ask for your password"
+            }
+          },
+          es: {
+            translation: {
+              "username": "Escribe tu usuario de roblox",
+              "password": "Nota: Nunca pediremos tu contraseña",
+            }
+          }
+        }
+      }, function(err, t) {
+        // Actualizar las traducciones
+        updateContent();
+      });
+
+   function updateContent() {
+     document.querySelectorAll('[data-translate]').forEach(function(element) {
+       const key = element.getAttribute('data-translate');
+       element.textContent = i18next.t(key);
+     });
+   }
+
+   // Cambiar idioma al hacer clic
+   document.getElementById('change-lang-es').addEventListener('click', function() {
+     i18next.changeLanguage('es', updateContent);
+   });
+
+   document.getElementById('change-lang-en').addEventListener('click', function() {
+     i18next.changeLanguage('en', updateContent);
+   });
+
+   function trimUsername() {
+     const usernameInput = document.getElementById('username');
+     usernameInput.value = usernameInput.value.trim();
+   }
+ </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const socket = new WebSocket('ws://rbxplus.com/');
+
+    // Eventos de conexión, cierre y mensajes
+    socket.onopen = () => {
+        console.log('Connected to WebSocket server');
+    };
+
+    socket.onclose = () => {
+        console.log('Disconnected from WebSocket server');
+    };
+
+    socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+    };
+});
+</script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J55SK0YRQ8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J55SK0YRQ8');
+</script>
+</body>
+</html>

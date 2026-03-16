@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Withdraws - RblxPlus</title>
+    <link rel="stylesheet" href="/public/dashboard.css">
+    <style>
+        /* Ocultar contenido por defecto */
+        #content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <%- include('partials/sidebar') %>
+        <div class="content">
+            <h1>Total users</h1>
+            <form action="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/users/" method="GET" class="search-form">
+                <input type="text" name="search" id="username" placeholder="Search by username" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>">
+                <button type="submit">Search</button>
+            </form>
+            <% if (users.length > 0) { %>
+                <%- include('../partials/notifications') %>
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>User Image</th>
+                            <th>Username</th>
+                            <th>Points</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user => { %>
+                            <tr>
+                                <td><img src="<%- user.imageUrl %>" alt="<%- user.user %>" style="width: 50px; height: 50px;"></td>
+                                <td><%- user.user %></td>
+                                <td><%- user.points %></td>
+                                <td>
+                                    <button type="submit" onclick="window.location.href = '/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/users/<%- user.robloxId %>/view'">View</button>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                
+                <div class="pagination">
+                    <% if (currentPage > 1) { %>
+                        <a href="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/users?page=<%= currentPage - 1 %>&search=<%= searchQuery %>">Previous</a>
+                    <% } %>
+
+                    <% for (let i = 1; i <= totalPages; i++) { %>
+                        <a href="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/users?page=<%= i %>&search=<%= searchQuery %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                    <% } %>
+
+                    <% if (currentPage < totalPages) { %>
+                        <a href="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/users?page=<%= currentPage + 1 %>&search=<%= searchQuery %>">Next</a>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <p>No users found.</p>
+            <% } %>
+        </div>
+    </div>
+
+    <script>
+        const form = document.querySelector(".search-form");
+        const container = document.querySelector("#usersTable tbody");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            fetch(`https://rbxplus.com/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/users/${e.target[0].value}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Limpiar el contenido actual de la tabla
+                    container.innerHTML = "";
+
+                    if (data.length === 0) {
+                        const p = document.createElement("p");
+                        p.textContent = "No se ha encontrado ningún usuario con esas características";
+                        p.style.textAlign = "center";
+                        p.style.margin = "10px";
+                        container.appendChild(p);
+                        return;
+                    }
+
+                    // Crear nuevas filas para cada usuario encontrado
+                    data.forEach(user => {
+                        const tr = document.createElement("tr");
+
+                        tr.innerHTML = `
+                            <td><img src="${user.imageUrl}" alt="${user.user}" style="width: 50px; height: 50px;"></td>
+                            <td>${user.user}</td>
+                            <td>${user.points}</td>
+                            <td>
+                                <button type="button" onclick="window.location.href='/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/users/${user.robloxId}/view'">View</button>
+                                <button type="button" onclick="window.location.href='/admin/users/${user.robloxId}/view'">View</button>
+                            </td>
+                        `;
+
+                        container.appendChild(tr);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching users:", error);
+                    container.innerHTML = "<p>Hubo un error al buscar el usuario.</p>";
+                });
+        });
+
+        // Verificar si el token existe en localStorage
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+            // Redirigir al usuario a la página de login si no hay token
+            window.location.href = '/login';
+        } else {
+            // Mostrar el contenido si el token está presente
+            document.getElementById('content').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

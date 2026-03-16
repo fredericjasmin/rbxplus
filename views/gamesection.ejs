@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/gamemain.css">
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+</head>
+<body>
+    <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+    <div id="websitepagecont">
+        <div id="tickets">
+            <div id="ticket1">
+                <h2 id="ticketss" class="shining-text" data-translate="tickets">Your Tickets:</h2>
+                <h4 id="ticketsammount" class="shining-text"><%- tickets %></h4>
+            </div>
+
+            <div id="ticket2">
+                <h2 id="valueticket" data-translate="value">1 Offer = 1 Ticket</h2>
+                <p id="ticketexplain" data-translate="explain">When you complete any offer, you'll receive a ticket per every offer completed
+                    ,  you can use it for play games in this section and earn more R$ extras
+                </p>
+            </div>
+           
+       </div>
+
+
+
+        <div id="titulojuego">
+            <h2 id="gamestittle" data-translate="gamestitle">Games</h2>
+            
+            <p id="explaingames" data-translate="explaingames">Important: To play a game for earn R$,
+                each game requires a cost of tickets
+                to play only once, so we recommend playing smartly</p>
+        </div>
+ 
+
+        <div class="slider">
+            <div class="gamecard">
+              <a href="/games/mines">
+                <img src="/public/image/Minesweeper.png" alt="mines">
+              </a>
+            </div>
+
+            <div class="gamecard">
+                <a href="/games/plinko">
+                    <img src="/public/image/Plinko.png" alt="plinko">
+                </a>
+            </div>
+
+            <div class="gamecard">
+              <a href="">
+                <img src="/public/image/soon1.webp" alt="soon">
+              </a>
+            </div>
+
+          
+            <button id="next">></button>
+            <button id="prev"><</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+    <script>
+       i18next
+         .use(i18nextBrowserLanguageDetector)
+         .init({
+           fallbackLng: 'en',
+           debug: true,
+           resources: {
+             en: {
+               translation: {
+                "tickets": "Your Tickets:",
+                 "value": "1 Offer = 1 Ticket",
+                 "explain": "When you complete any offer, you'll receive a ticket per every offer completed,  you can use it for play games in this section and earn more R$ extras",
+                 "gamestitle": "Games",
+                 "explaingames": "Important: To play a game for earn R$, each game requires a cost of tickets to play only once, so we recommend playing smartly"
+               }
+             },
+             es: {
+               translation: {
+                 "tickets": "Tus Tickets:",
+                 "value": "1 Oferta = 1 Ticket",
+                 "explain": "Cuando completes una oferta, recibiras un ticket por cada oferta completada, puedes usarlos para jugar juegos y ganar R$ extras",
+                 "gamestitle": "Juegos",
+                 "explaingames": "Importante: Para jugar un juego, cada juego requiere de un costo de tickets para jugar solo 1 vez, juegue inteligentemente"
+               }
+             }
+           }
+         }, function(err, t) {
+           // Actualizar las traducciones
+           updateContent();
+         });
+
+      function updateContent() {
+        document.querySelectorAll('[data-translate]').forEach(function(element) {
+          const key = element.getAttribute('data-translate');
+          element.innerHTML = i18next.t(key); // Usamos innerHTML para manejar el contenido HTML
+        });
+      }
+
+      // Cambiar idioma al hacer clic
+      document.getElementById('change-lang-es').addEventListener('click', function() {
+        i18next.changeLanguage('es', updateContent);
+      });
+
+      document.getElementById('change-lang-en').addEventListener('click', function() {
+        i18next.changeLanguage('en', updateContent);
+      });
+      </script>
+    <script src="/public/slider.js"></script>
+</body>
+</html>

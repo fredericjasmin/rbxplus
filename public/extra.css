@@ -1,0 +1,482 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('/public/image/background.PNG');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#extra1{
+    color: blueviolet;
+    
+}
+#positiontheui{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+#tasksui{
+    background-color: rgb(11, 16, 81);
+    width: 800px;
+    height: 730px;
+    margin-top: 60px;
+    border-radius: 35px;
+    border: 7px solid rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+#tittle{
+    background-color: rgb(62, 13, 208);
+    color: white;
+    font-size: 35px;
+    height: 53px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    position: relative;
+    top: -30px;
+}
+
+#counter{
+    font-size: 40px;
+    position: relative;
+    color: white;
+    top:-10px
+}
+
+.tasks{
+    background-color: rgba(77, 9, 136, 0.927);
+    margin-top: 20px;
+    width: 500px;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    border: 4px solid rgb(255, 255, 255);
+    border-radius: 15px;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    padding: 15px;
+}
+.xdd{
+    margin-left: 5px;
+}
+.countertask{
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 1000;
+    font-size: 20px;
+}
+.description{
+    font-size: 15px;
+}
+.tasktit{
+    font-size: 30px;
+}
+button{
+    width: 150px;
+    height: 50px;
+    border: none;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
+
+    background-color: rgb(255, 0, 255);
+    transition: transform 0.3s ease;
+}
+button:hover{
+    transform: scale(1.1);
+}
+
+@media (max-width: 920px) {
+    #tasksui{
+        background-color: rgb(11, 16, 81);
+        width: 500px;
+        height: 730px;
+        margin-top: 60px;
+        border-radius: 35px;
+        border: 7px solid rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+    }
+
+    #tittle{
+        background-color: rgb(62, 13, 208);
+        color: white;
+        font-size: 30px;
+        height: 53px;
+        width: 330px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        position: relative;
+        top: -30px;
+    }
+    
+    #counter{
+        font-size: 35px;
+        position: relative;
+        color: white;
+        top:-10px
+    }
+    
+    .tasks{
+        background-color: rgba(77, 9, 136, 0.927);
+        margin-top: 20px;
+        width: 380px;
+        height: 120px;
+        display: flex;
+        justify-content: space-between;
+        border: 4px solid rgb(255, 255, 255);
+        border-radius: 15px;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        padding: 15px;
+    }
+    .xdd{
+        margin-left: 5px;
+    }
+    .countertask{
+        font-family:Arial, Helvetica, sans-serif;
+        font-weight: 1000;
+        font-size: 17px;
+    }
+    .description{
+        font-size: 12px;
+    }
+    .tasktit{
+        font-size: 16px;
+    }
+    button{
+        width: 120px;
+        height: 35px;
+        border: none;
+        font-size: 12px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+    
+        background-color: rgb(255, 0, 255);
+    }
+}
+
+@media (max-width: 592px) {
+    #tasksui{
+        background-color: rgb(11, 16, 81);
+        width: 400px;
+        height: 630px;
+        margin-top: 60px;
+        border-radius: 35px;
+        border: 7px solid rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+    }
+
+    #tittle{
+        background-color: rgb(62, 13, 208);
+        color: white;
+        font-size: 28px;
+        height: 53px;
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        position: relative;
+        top: -30px;
+    }
+    
+    #counter{
+        font-size: 29px;
+        position: relative;
+        color: white;
+        top:-10px
+    }
+    
+    .tasks{
+        background-color: rgba(77, 9, 136, 0.927);
+        margin-top: 20px;
+        width: 340px;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        border: 3px solid rgb(255, 255, 255);
+        border-radius: 15px;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        padding: 15px;
+    }
+    .xdd{
+        margin-left: 5px;
+    }
+    .countertask{
+        font-family:Arial, Helvetica, sans-serif;
+        font-weight: 1000;
+        font-size: 17px;
+    }
+    .description{
+        font-size: 12px;
+    }
+    .tasktit{
+        font-size: 16px;
+    }
+    button{
+        width: 120px;
+        height: 35px;
+        border: none;
+        font-size: 12px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+    
+        background-color: rgb(255, 0, 255);
+    }
+}
+
+@media (max-width: 459px) {
+    #tasksui{
+        background-color: rgb(11, 16, 81);
+        width: 300px;
+        height: 600px;
+        margin-top: 60px;
+        border-radius: 35px;
+        border: 6px solid rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+    }
+
+    #tittle{
+        background-color: rgb(62, 13, 208);
+        color: white;
+        font-size: 24px;
+        height: 43px;
+        width: 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        position: relative;
+        top: -30px;
+    }
+    
+    #counter{
+        font-size: 23px;
+        position: relative;
+        color: white;
+        top:-10px
+    }
+    
+    .tasks{
+        background-color: rgba(77, 9, 136, 0.927);
+        margin-top: 20px;
+        width: 240px;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 15px;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        padding: 15px;
+    }
+    .xdd{
+        margin-left: -5px;
+    }
+    .countertask{
+        font-family:Arial, Helvetica, sans-serif;
+        font-weight: 1000;
+        font-size: 10px;
+    }
+    .description{
+        font-size: 9px;
+    }
+    .tasktit{
+        font-size: 13px;
+    }
+    button{
+        width: 78px;
+        height: 25px;
+        border: none;
+        font-size: 10px;
+        position: relative;
+        right: -7px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+    
+        background-color: rgb(255, 0, 255);
+    }
+}
+
+@media (max-width: 356px) {
+    #tasksui{
+        background-color: rgb(11, 16, 81);
+        width: 250px;
+        height: 580px;
+        margin-top: 60px;
+        border-radius: 35px;
+        border: 5px solid rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+    }
+
+    #tittle{
+        background-color: rgb(62, 13, 208);
+        color: white;
+        font-size: 20px;
+        height: 42px;
+        width: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        position: relative;
+        top: -30px;
+    }
+    
+    #counter{
+        font-size: 20px;
+        position: relative;
+        color: white;
+        top:-10px
+    }
+    
+    .tasks{
+        background-color: rgba(77, 9, 136, 0.927);
+        margin-top: 20px;
+        width: 200px;
+        height: 94px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 15px;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        padding: 15px;
+    }
+    .xdd{
+        margin-left: -5px;
+    }
+    .countertask{
+        font-family:Arial, Helvetica, sans-serif;
+        font-weight: 1000;
+        font-size: 10px;
+    }
+    .description{
+        font-size: 9px;
+    }
+    .tasktit{
+        font-size: 13px;
+    }
+    button{
+        width: 78px;
+        height: 25px;
+        border: none;
+        font-size: 10px;
+        position: relative;
+        right: 2px;
+        margin-top: 6px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+    
+        background-color: rgb(255, 0, 255);
+    }
+}
+
+@media (max-width: 290px) {
+    #tasksui{
+        background-color: rgb(11, 16, 81);
+        width: 200px;
+        height: 480px;
+        margin-top: 60px;
+        border-radius: 35px;
+        border: 4px solid rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+    }
+
+    #tittle{
+        background-color: rgb(62, 13, 208);
+        color: white;
+        font-size: 15px;
+        height: 42px;
+        width: 140px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        position: relative;
+        top: -30px;
+    }
+    
+    #counter{
+        font-size: 17px;
+        position: relative;
+        color: white;
+        top:-10px
+    }
+    
+    .tasks{
+        background-color: rgba(77, 9, 136, 0.927);
+        margin-top: 20px;
+        width: 140px;
+        height: 74px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 15px;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        padding: 15px;
+    }
+    .xdd{
+        margin-left: -5px;
+    }
+    .countertask{
+        font-family:Arial, Helvetica, sans-serif;
+        font-weight: 1000;
+        font-size: 8px;
+    }
+    .description{
+        font-size: 6px;
+    }
+    .tasktit{
+        font-size: 9px;
+    }
+    button{
+        width: 60px;
+        height: 25px;
+        border: none;
+        font-size: 8px;
+        position: relative;
+        right: 2px;
+        margin-top: 6px;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+    
+        background-color: rgb(255, 0, 255);
+    }
+}

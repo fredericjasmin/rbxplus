@@ -1,0 +1,496 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    font-family:"Poppins";
+}
+
+body{
+    background-image: url('/public/image/background.PNG');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+
+#game-container{
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 550px;
+    text-align: center;
+    gap: 10px;
+    margin-top: 40px;
+
+}
+
+#board{
+    background-color: rgb(34, 31, 110);;
+    grid-column: 2/-1;
+    border-radius: 50px;
+    border: none;
+ 
+    
+}
+#robux-earned{
+    color:white;
+}
+#controls{
+    grid-column: 0/1;
+    background-color: rgb(34, 31, 110);;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border:none;
+}
+label{
+    color: white;
+    font-weight: 1000;
+    font-size: 40px;
+    margin:10px;
+}
+#minesss{
+    transition: 0.4s ease;
+    
+}
+#minesss:hover{
+    transform: scale(1.1);
+}
+
+input{
+    width: 200px;
+    border: none;
+  
+    font-size: 15px ;
+    font-weight: 1000;
+    height: 40px;
+    background-color:rgb(54, 51, 150);
+    color: white;
+    border: none;
+    text-align: center;
+    
+    
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+input:focus{
+    border: none;
+    outline: none;
+}
+
+button{
+    margin-top: 15px;
+    width: 200px;
+    height: 40px;
+    border: none;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: rgb(0, 0, 254);
+    color: white;
+    border-radius: 15px;
+    transition: background-color 0.5s;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button:hover{
+    background-color: rgb(10, 66, 244);
+}
+button:active{
+    background-color: rgb(10, 266, 444);
+}
+
+.minesboard{
+    color: white;
+    font-size: 70px;
+    width: 90px;
+    height: 90px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(44, 51, 150);
+    cursor: pointer;
+    margin: 5px;
+    margin-top: 2px;
+}
+
+
+#board{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 30px;
+}
+
+.h1-cell {
+    color: white;
+    font-size: 70px;
+    width: 90px;
+    height: 90px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(44, 51, 150);
+    cursor: pointer;
+    margin: 5px;
+    margin-top: 2px;
+    transition: box-shadow 0.4s ease;
+}
+
+.h1-cell.selected {
+    box-shadow: 0 0 10px 5px rgba(244, 244, 241, 0.998); /* Efecto de brillo */
+    border: 2px solid rgb(247, 247, 247);
+}
+
+#textlogo{
+    color: #139aed;
+    position: relative;
+    top: -20px;
+    font-weight: 750;
+    transition: 0.4s ease;
+    font-size: 40px;
+}
+#textlogo:hover{
+    transform: scale(1.1);
+}
+
+.h1-cell:hover {
+    
+    border: 2px solid rgb(255, 255, 255);
+}
+
+
+
+
+@media (max-width: 1015px){
+    #board{
+        background-color: rgb(34, 31, 110);;
+        grid-column: 1/-1;
+        border-radius: 50px;
+        border: none;
+    }
+    #controls{
+        grid-column: 1/-1;
+        background-color: rgb(34, 31, 110);;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        border:none;
+    }
+    
+#game-container{
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 200px;
+    text-align: center;
+    gap: 10px;
+    margin-top: 40px;
+
+}
+#textlogo{
+    color: #139aed;
+    position: relative;
+    top: -10px;
+    font-weight: 750;
+    transition: 0.4s ease;
+    font-size: 20px;
+}
+#robux-earned{
+    color:white;
+    font-size: 20px;
+}
+}
+
+@media (max-width: 676px){
+    #board{
+        background-color: rgb(34, 31, 110);;
+        grid-column: 1/-1;
+        border-radius: 50px;
+        border: none;
+    }
+    #controls{
+        grid-column: 1/-1;
+        background-color: rgb(34, 31, 110);;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        border:none;
+    }
+    
+#game-container{
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 200px;
+    text-align: center;
+    gap: 10px;
+    margin-top: 40px;
+
+}
+#textlogo{
+    color: #139aed;
+    position: relative;
+    top: -10px;
+    font-weight: 750;
+    transition: 0.4s ease;
+    font-size: 20px;
+}
+#robux-earned{
+    color:white;
+    font-size: 20px;
+}
+.minesboard{
+    color: white;
+    font-size: 70px;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(44, 51, 150);
+    cursor: pointer;
+    margin: 5px;
+    margin-top: 2px;
+}
+.h1-cell {
+    color: white;
+    font-size: 70px;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(44, 51, 150);
+    cursor: pointer;
+    margin: 5px;
+    margin-top: 2px;
+    transition: box-shadow 0.4s ease;
+}
+button{
+    margin-top: 15px;
+    width: 140px;
+    height: 30px;
+    border: none;
+    font-weight: 800;
+
+    font-size: 12px;
+    cursor: pointer;
+    background-color: rgb(0, 0, 254);
+    color: white;
+    border-radius: 15px;
+    transition: background-color 0.5s;
+    text-align: center;
+}
+
+}
+@media (max-width: 566px){
+   
+.minesboard{
+    color: white;
+    font-size: 70px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(44, 51, 150);
+    cursor: pointer;
+    margin: 5px;
+    margin-top: 2px;
+}
+.h1-cell {
+    color: white;
+    font-size: 70px;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(44, 51, 150);
+    cursor: pointer;
+    margin: 5px;
+    margin-top: 2px;
+    transition: box-shadow 0.4s ease;
+}
+#board{
+    background-color: rgb(34, 31, 110);;
+    grid-column: 1/-1;
+    border-radius: 50px;
+    border: none;
+    height: 400px;
+}
+#textlogo{
+    color: #139aed;
+    position: relative;
+    top: -10px;
+    font-weight: 750;
+    transition: 0.4s ease;
+    font-size: 15px;
+}
+#robux-earned{
+    color:white;
+    font-size: 15px;
+}
+}
+@media (max-width: 479px){
+   
+    .minesboard{
+        color: white;
+        font-size: 70px;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        background-color: rgb(44, 51, 150);
+        cursor: pointer;
+        margin: 5px 2px;
+    }
+    .h1-cell {
+        color: white;
+        font-size: 70px;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: rgb(44, 51, 150);
+        cursor: pointer;
+        margin: 5px 2px;
+        transition: box-shadow 0.4s ease;
+    }
+    #board{
+        background-color: rgb(34, 31, 110);;
+        grid-column: 1/-1;
+        border-radius: 50px;
+        border: none;
+        height: 350px;
+    }
+    
+    }
+
+    @media (max-width: 386px){
+   
+        .minesboard{
+            color: white;
+            font-size: 70px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgb(44, 51, 150);
+            cursor: pointer;
+            margin: 5px 2px;
+        }
+        .h1-cell {
+            color: white;
+            font-size: 70px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: rgb(44, 51, 150);
+            cursor: pointer;
+            margin: 5px 2px;
+            transition: box-shadow 0.4s ease;
+        }
+        #board{
+            background-color: rgb(34, 31, 110);;
+            grid-column: 1/-1;
+            border-radius: 50px;
+            border: none;
+            height: 350px;
+        }
+        
+        }
+
+        @media (max-width: 336px){
+   
+            .minesboard{
+                color: white;
+           
+                width: 29px;
+                height: 29px;
+                border: none;
+                border-radius: 8px;
+                background-color: rgb(44, 51, 150);
+                cursor: pointer;
+                margin: 5px 2px;
+            }
+            .h1-cell {
+                color: white;
+                width: 29px;
+                height: 29px;
+                border: none;
+                border-radius: 8px;
+                background-color: rgb(44, 51, 150);
+                cursor: pointer;
+                margin: 5px 2px;
+                transition: box-shadow 0.4s ease;
+                overflow: hidden;
+            }
+            #board{
+                background-color: rgb(34, 31, 110);;
+                grid-column: 1/-1;
+                border-radius: 50px;
+                border: none;
+                height: 280px;
+            }
+            
+            }
+
+            @media (max-width: 265px){
+   
+                .minesboard{
+                    color: white;
+               
+                    width: 24px;
+                    height: 24px;
+                    border: none;
+                    border-radius: 8px;
+                    background-color: rgb(44, 51, 150);
+                    cursor: pointer;
+                    margin: 5px 2px;
+                }
+                .h1-cell {
+                    color: white;
+                    width: 24px;
+                    height: 24px;
+                    border: none;
+                    border-radius: 8px;
+                    background-color: rgb(44, 51, 150);
+                    cursor: pointer;
+                    margin: 5px 2px;
+                    overflow: hidden;
+                    transition: box-shadow 0.4s ease;
+                }
+                #board{
+                    background-color: rgb(34, 31, 110);;
+                    grid-column: 1/-1;
+                    border-radius: 50px;
+                    border: none;
+                    height: 220px;
+                }
+                
+                }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Withdraws - RblxPlus</title>
+    <link rel="stylesheet" href="/public/promocodes.css">
+</head>
+<body>
+    <%- include('partials/sidebar') %>
+    
+    <!-- Contenido oculto inicialmente -->
+    <div id="promocodeContent" class="content" style="display: none;">
+        <h1>Create a new promocode</h1>
+        <%- include('../partials/notifications') %>
+        <h2>Create a promocode</h2>
+        <div class="transactions">
+            <div class="user-card">
+                <div class="user-info">
+                    <form class="account-form" action="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/promocodes" method="post">
+                        <div class="form-group">
+                            <label for="name">Code name</label>
+                            <input type="text" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="max-uses">Max Uses</label>
+                            <input type="number" id="max-uses" name="maxUses">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" name="amount">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="creatorCode">Is Creator Code?</label>
+                            <input type="checkbox" id="creatorCode" name="creatorCode">
+                        </div>
+                        <div class="form-buttons">
+                            <button class="save-change" type="submit">Save Change</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('authToken');
+
+        // Mostrar el contenido solo si el token existe
+        if (token) {
+            document.getElementById('promocodeContent').style.display = 'block';
+        } else {
+            // Redirigir al login si no hay token
+            window.location.href = '/login';
+        }
+    </script>
+</body>
+</html>

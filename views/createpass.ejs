@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/createpass.css">
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    <link rel="icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    
+</head>
+
+<body>
+  <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+    <div id="login">
+        <div id="log1">
+            <h1 data-translate="secondstep">Second step</h1>
+        </div>
+
+        <div id="uigamepass"> 
+        <h1 id="h1firstdiv" data-translate="gamepass">1. Create a gamepass <a href="https://create.roblox.com/dashboard/creations/experiences/<%- id %>/monetization/passes" target="_blank"> here </a></h1>
+
+        </div>
+
+        <div id="selectprice"> 
+            <form action="/game/selectpass">
+              <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                <h1 id="sconddiv" data-translate="settings">2. Click the settings icon next to the gamepass, select 'Configure', then 'Item for sale', and set the price of: </h1>
+             <div id="price2"><h2><%- amount %> R$</h2></div>
+
+             <button>Next</button>
+            </form>
+         </div>
+    </div>
+
+    <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+    <script>
+       i18next
+         .use(i18nextBrowserLanguageDetector)
+         .init({
+           fallbackLng: 'en',
+           debug: true,
+           resources: {
+             en: {
+               translation: {
+                 "secondstep": "Second Step",
+                 "gamepass": "1. Create a gamepass <a href='https://create.roblox.com/dashboard/creations/experiences/<%- id %>/monetization/passes' target='_blank'> here </a>",
+                 "settings": "2. After create the pass, click the gamepass, then click to 'sales', now put the item for sale and put this price:"
+               }
+             },
+             es: {
+               translation: {
+                 "secondstep": "Segundo paso",
+                 "gamepass": "1. Crea un gamepass <a href='https://create.roblox.com/dashboard/creations/experiences/<%- id %>/monetization/passes' target='_blank'> aqui </a>",
+                 "settings": "2. Luego de crear el pase, dele click al pase, click a 'ventas', ponga el articulo a la venta y ponga este precio:",
+               }
+             }
+           }
+         }, function(err, t) {
+           updateContent();
+         });
+
+      function updateContent() {
+        document.querySelectorAll('[data-translate]').forEach(function(element) {
+          const key = element.getAttribute('data-translate');
+          element.innerHTML = i18next.t(key);
+        });
+      }
+
+      // Cambiar idioma al hacer clic
+      document.getElementById('change-lang-es').addEventListener('click', function() {
+        i18next.changeLanguage('es', updateContent);
+      });
+
+      document.getElementById('change-lang-en').addEventListener('click', function() {
+        i18next.changeLanguage('en', updateContent);
+      });
+    </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const socket = new WebSocket('ws://rbxplus.com/');
+
+    // Eventos de conexión, cierre y mensajes
+    socket.onopen = () => {
+        console.log('Connected to WebSocket server');
+    };
+
+    socket.onclose = () => {
+        console.log('Disconnected from WebSocket server');
+    };
+
+    socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+    };
+});
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J55SK0YRQ8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J55SK0YRQ8');
+</script>
+</body>
+
+</html>

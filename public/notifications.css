@@ -1,0 +1,88 @@
+@font-face {
+    font-family: "mont";
+    src: url('/public/font/Mont-HeavyDEMO_1.woff');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}   
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+}
+.overlay.show {
+    visibility: visible;
+}
+.notification {
+    background-color: #3e09b8;
+    border: 3px solid #ffffff;
+    border-radius: 10px;
+    width: 90%;
+    height: 350px;
+    max-width: 600px; 
+    padding: 30px; 
+    text-align: center;
+    color: white;
+    position: relative;
+}
+.notification h2 {
+    font-family: "mont";
+    font-size: 32px;
+    margin: 15px 0;
+}
+.notification p {
+    font-family: "mont";
+    font-size: 18px;
+    margin: 15px 0;
+}
+.notification .close-btn {
+    background-color: #f1c40f;
+    border: none;
+    width: 120px;
+    padding: 15px 25px; 
+    border-radius: 5px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+}
+.notification .close-btn:hover {
+    background-color: #d4ac0d;
+}
+.notification .error-icon {
+    font-size: 70px; 
+    color: #ff0000;
+}
+
+.notification .success-icon {
+    font-size: 70px; 
+    color: #00ff3c;
+}
+
+@media (max-width: 390px){
+    .notification {
+        background-color: #3e09b8;
+        border: 3px solid #ffffff;
+        border-radius: 10px;
+        width: 90%;
+        height: 390px;
+        max-width: 600px; 
+        padding: 30px; 
+        text-align: center;
+        color: white;
+        position: relative;
+    }
+}

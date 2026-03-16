@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Withdraws - RblxPlus</title>
+    <link rel="stylesheet" href="/public/dashboard.css">
+</head>
+<body>
+    <%- include('partials/sidebar') %>
+    <div class="content">
+        <h1>Pending Withdraws</h1>
+        <%- include('../partials/notifications') %>
+        
+        <!-- Contenido oculto inicialmente -->
+        <div id="withdrawsContent" style="display: none;">
+            <table id="withdrawsTable">
+                <thead>
+                    <tr>
+                        <th>Game Pass Image</th>
+                        <th>Game Pass</th>
+                        <th>Game Pass Owner</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (withdraws.length > 0) { %>
+                        <% withdraws.forEach(withdraw => { %>
+                            <tr>
+                                <td><img src="<%- withdraw.passImage %>" alt="<%- withdraw.passName %>" style="width: 50px; height: 50px;"></td>
+                                <td><%- withdraw.passName %></td>
+                                <td><%- withdraw.username %></td>
+                                <td><%- withdraw.robuxAmount %></td>
+                                <td><%- withdraw.paid === false ? 'Pending' : 'Paid' %></td>
+                                <td>
+                                    <a href="https://www.roblox.com/es/game-pass/<%- withdraw.passId %>/<%- withdraw.passName %>" target="_blank">Buy</a>
+                                    <form action="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/withdraws" method="POST">
+                                        <input type="hidden" name="withdrawId" value="<%- withdraw.id %>">
+                                        <input type="hidden" name="passId" value="<%- withdraw.passId %>">
+                                        <button type="submit">Completed</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6">No pending withdraws found.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
+            <% if (totalPages > 1) { %>
+                <div class="pagination">
+                    <% if (currentPage > 1) { %>
+                        <a href="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/withdraws?page=<%= currentPage - 1 %>">Previous</a>
+                    <% } %>
+
+                    <% for (let i = 1; i <= totalPages; i++) { %>
+                        <a href="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/withdraws?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                    <% } %>
+
+                    <% if (currentPage < totalPages) { %>
+                        <a href="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/withdraws?page=<%= currentPage + 1 %>">Next</a>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+
+    </div>
+
+    <script>
+        const token = localStorage.getItem('authToken');
+
+        // Mostrar el contenido solo si el token existe
+        if (token) {
+            document.getElementById('withdrawsContent').style.display = 'block';
+        } else {
+            // Redirigir al login si no hay token
+            window.location.href = '/login';
+        }
+    </script>
+</body>
+</html>

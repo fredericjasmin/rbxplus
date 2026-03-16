@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Withdraws - RblxPlus</title>
+    <link rel="stylesheet" href="/public/promocodes.css">
+    <style>
+        /* Ocultar contenido por defecto */
+        #content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <%- include('partials/sidebar') %>
+        <div class="content">
+            <h2>Promocodes History</h2>
+            <div class="transactions">
+                <% if (promocodes) { %>
+                    <% promocodes.forEach(promocode => { %>
+                        <div class="user-card">
+                            <div class="user-info">
+                                <form class="account-form" action="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/promocodes/update" method="post">
+                                    <div class="form-group">
+                                        <label for="name">Code name</label>
+                                        <input type="text" id="name" value="<%- promocode.code %>" name="name">
+                                        <input type="hidden" name="oldName" value="<%- promocode.code %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="welcome-message">Max Uses</label>
+                                        <input type="number" id="welcome-message" value="<%- promocode.maxUses %>" name="maxUses">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="welcome-message">Uses</label>
+                                        <input type="number" id="welcome-message" value="<%- promocode.uses %>" name="uses">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="welcome-message">Amount</label>
+                                        <input type="number" id="welcome-message" value="<%- promocode.robux %>" name="amount">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="creatorCode">Is Creator Code?</label>
+                                        <input type="checkbox" id="creatorCode" name="creatorCode" value="true" <%= promocode.isCreator ? 'checked' : '' %>>
+                                    </div>
+                                    <div class="form-buttons">
+                                        <button class="save-change" type="submit">Save Change</button>
+                                    </div>
+                                </form>
+                                <form action="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad/admin/promocodes/delete" method="post" style="display: inline;">
+                                    <input type="hidden" name="code" value="<%- promocode.code %>">
+                                    <button class="cancel" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p class="no-user">No promocodes found.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Verificar si el token existe en localStorage
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+            // Redirigir al usuario a la página de login si no hay token
+            window.location.href = '/login';
+        } else {
+            // Mostrar el contenido si el token está presente
+            document.getElementById('content').style.display = 'block';
+        }
+
+        document.querySelectorAll('.account-form').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            const creatorCodeCheckbox = form.querySelector('#creatorCode');
+
+            // Si el checkbox está desmarcado, crear un campo oculto que envíe 'false'
+            if (!creatorCodeCheckbox.checked) {
+                const hiddenField = document.createElement('input');
+                hiddenField.type = 'hidden';
+                hiddenField.name = 'creatorCode';
+                hiddenField.value = 'false';
+                form.appendChild(hiddenField);
+            }
+        });
+    });
+    </script>
+</body>
+</html>

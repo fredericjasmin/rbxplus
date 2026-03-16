@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/plinko.css">
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+</head>
+
+<body>
+    <%- include('partials/preload') %>
+        <%- include('partials/navbar') %>
+            <div id="game-container">
+                <div id="controls">
+                    <h2 id="textlogo">Plinko</h2>
+                    <input type="number" id="ballCountInput" placeholder="1" style="padding: 10px; width: 60px;"
+                        min="1">
+                        <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                    <button id="startbutton"><i class="lni lni-ticket" style="margin-right: 8px;"></i>2</button>
+                </div>
+
+                <div id="board">
+                    <canvas id="plinkoCanvas" width="550" height="600"></canvas>
+                    <div class="multipliers">
+                        <div class="multiplier">8.9x</div>
+                        <div class="multiplier">3x</div>
+                        <div class="multiplier">1.4x</div>
+                        <div class="multiplier">1.1x</div>
+                        <div class="multiplier">1x</div>
+                        <div class="multiplier">0.5x</div>
+                        <div class="multiplier">1x</div>
+                        <div class="multiplier">1.1x</div>
+                        <div class="multiplier">1.4x</div>
+                        <div class="multiplier">3x</div>
+                        <div class="multiplier">8.9x</div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                const canvas = document.getElementById('plinkoCanvas');
+                const startButton = document.getElementById('startbutton');
+                const ballCountInput = document.getElementById('ballCountInput');
+                const csrfToken = document.getElementById('_csrf').value;
+                const ctx = canvas.getContext('2d');
+                const pins = [];
+                const balls = [];
+                const slots = [];
+                const gravity = 0.4;
+                const friction = 0.97;
+                const maxSpeed = 3.5;
+
+                const pinRows = 10;
+                const pinColumns = 13;
+                const pinSpacingX = 45;
+                const pinSpacingY = 45;
+                const pinRadius = 5;
+
+                const barrierPadding = 10;
+                const stopY = canvas.height - 100;
+
+                const leftBarrier = 25;
+                const rightBarrier = canvas.width;
+
+                function createPins() {
+                    const centerX = canvas.width / 2;
+                    for (let row = 0; row < pinRows; row++) {
+                        const numberOfPins = row + 3;
+                        const offsetX = (canvas.width - (numberOfPins - 1) * pinSpacingX) / 2;
+                        for (let col = 0; col < numberOfPins; col++) {
+                            const x = offsetX + col * pinSpacingX;
+                            const y = row * pinSpacingY + 50;
+                            pins.push({ x, y, radius: pinRadius });
+                        }
+                    }
+                }
+
+                function createSlots() {
+                    const slotWidth = 50;
+                    for (let i = 0; i <= canvas.width / slotWidth; i++) {
+                        slots.push({ x: i * slotWidth, width: slotWidth });
+                    }
+                }
+
+                function drawPins() {
+                    pins.forEach(pin => {
+                        ctx.beginPath();
+                        ctx.arc(pin.x, pin.y, pin.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                }
+
+                function drawSlots() {
+                    ctx.fillStyle = '#fff';
+                    slots.forEach(slot => {
+                        ctx.fillRect(slot.x, canvas.height - 50, slot.width, 0);
+                    });
+                }
+
+                function drawBall(ball) {
+                    ctx.beginPath();
+                    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    drawPins();
+                    drawSlots();
+                    balls.forEach(ball => drawBall(ball));
+                    update();
+                    requestAnimationFrame(draw);
+                }
+
+                const multipliers = [8.9, 3, 1.4, 1.1, 1, 0.5, 1, 1.1, 1.4, 3, 8.9];
+                let totalSum = 0;
+                let multiplied = 0;
+
+                function updateBall(ball, index) {
+                    ball.vy += gravity;
+                    ball.vx *= friction;
+                    ball.vy *= friction;
+
+                    if (ball.vy > maxSpeed) {
+                        ball.vy = maxSpeed;
+                    }
+
+                    ball.x += ball.vx;
+                    ball.y += ball.vy;
+
+                    // Colisión con los pines
+                    pins.forEach(pin => {
+                        const dx = ball.x - pin.x;
+                        const dy = ball.y - pin.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < pin.radius + ball.radius) {
+                            const angle = Math.atan2(dy, dx);
+                            const targetX = pin.x + Math.cos(angle) * (pin.radius + ball.radius);
+                            const targetY = pin.y + Math.sin(angle) * (pin.radius + ball.radius);
+                            ball.x = targetX;
+                            ball.y = targetY;
+
+                            ball.vx += Math.cos(angle) * 2;
+                            ball.vy = -Math.abs(ball.vy * 0.7);
+
+                            if (Math.random() > 0.5) {
+                                ball.vx += 1.2;
+                            } else {
+                                ball.vx -= 1.2;
+                            }
+                        }
+                    });
+
+
+                    if (ball.x - ball.radius <= leftBarrier) {
+                        ball.x = leftBarrier + ball.radius;
+                        ball.vx = Math.abs(ball.vx);
+                    }
+
+                    if (ball.x + ball.radius >= rightBarrier) {
+                        ball.x = rightBarrier - ball.radius;
+                        ball.vx = -Math.abs(ball.vx);
+                    }
+
+
+                    if (ball.y + ball.radius >= canvas.height - 50) {
+                        // Detectar en qué slot cayó la bola
+                        const slotWidth = canvas.width / multipliers.length;
+                        const nearestSlotIndex = Math.floor(ball.x / slotWidth);
+
+
+                        const multiplier = multipliers[nearestSlotIndex];
+                        const ballCount = parseInt(document.getElementById('ballCountInput').value) || 1;
+
+                        totalSum += multiplier;
+                        multiplied = 0.5 * totalSum;
+
+
+
+
+                        balls.splice(index, 1);
+
+                        if (balls.length === 0) {
+                            updateUserBalance(multiplied);
+                            Swal.fire({
+                                title: 'Congrats!',
+                                text: `You Earned ${roundToDecimals(multiplied, 2)} R$`,
+                                icon: 'success',
+                                confirmButtonText: 'Ok',
+                                background: '#3e09b8',
+                                color: '#fff',
+                                iconColor: '#fff'
+                            }).then(() => {
+                                resetGame();
+                            });
+                        }
+                    }
+
+
+                    if (ball.y - ball.radius < 0) {
+                        ball.y = ball.radius;
+                        ball.vy = Math.abs(ball.vy);
+                    }
+                }
+
+                function roundToDecimals(number, decimals) {
+                    const factor = Math.pow(10, decimals);
+                    return Math.round(number * factor) / factor;
+                }
+
+                function resetGame() {
+
+                    totalSum = 0;
+                    multiplied = 0;
+
+                    // Vaciar las bolas
+                    balls.length = 0;
+
+
+                    pins.length = 0;
+                    createPins();
+
+
+                    draw();
+                }
+
+                function update() {
+                    balls.forEach((ball, index) => updateBall(ball, index));
+                }
+
+
+                function dropBall() {
+                    const ballCount = parseInt(document.getElementById('ballCountInput').value) || 1;
+
+                    for (let i = 0; i < ballCount; i++) {
+                        const ball = {
+                            x: canvas.width / 2,
+                            y: 20,
+                            radius: 7,
+                            vx: (Math.random() - 0.25) * 2,
+                            vy: 0
+                        };
+                        balls.push(ball);
+                    }
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    drawPins();
+                    drawSlots();
+                    balls.forEach(drawBall);
+                }
+
+                function update() {
+                    balls.forEach(updateBall);
+                }
+
+                function animate() {
+                    draw();
+                    update();
+                    requestAnimationFrame(animate);
+                }
+
+                async function updateUserBalance(earnedRobux) {
+                    const data = {
+                        username: '<%- user.username %>',
+                        earnedRobux: earnedRobux
+                    }
+
+                    await fetch('/games/plinko/balance', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'CSRF-Token': csrfToken,
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log('Balance actualizado exitosamente');
+                            } else {
+                                console.log('Error al actualizar el balance');
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                }
+
+                createPins();
+                createSlots();
+                animate();
+
+                ballCountInput.addEventListener('input', async function () {
+                    let value = this.value;
+
+                    // Comprobar si es un número negativo
+                    if (value < 1) {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: `You can't put negative values!`,
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            background: '#3e09b8',
+                            color: '#fff',
+                            iconColor: '#fff'
+                        })
+                        this.value = 1; // Restablecer el valor a 1 si es negativo
+                    }
+
+                    // Eliminar signos de más si el usuario los pone
+                    this.value = this.value.replace('+', '');
+                })
+
+                document.getElementById('startbutton').addEventListener('click', async function () {
+
+                    try {
+
+                        const ballCount = parseInt(document.getElementById('ballCountInput').value) || 1;
+
+                        const response = await fetch('/games/plinko', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'CSRF-Token': csrfToken,
+                            },
+                            body: JSON.stringify({ robloxUser: `<%- user.username %>`, numberOfBalls: ballCount,  })
+                        });
+
+                        const data = await response.json();
+
+                        if (data.hasTickets) {
+                            Swal.fire({
+                                title: 'Are you sure?',
+                                text: `Do you want to spend ${ballCount * 2} tickets for ${ballCount} balls`,
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonText: 'Yes',
+                                cancelButtonText: 'No',
+                                reverseButtons: true,
+                                background: '#3e09b8',
+                                color: '#fff',
+                                iconColor: '#fff'
+                            }).then(async (result) => {
+                                if (result.isConfirmed) {
+                                    const ticketResponse = await fetch('/games/plinko/deduct-tickets', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'CSRF-Token': csrfToken,
+                                        },
+                                        body: JSON.stringify({ robloxUser: `<%- user.username %>`, numberOfBalls: ballCount })
+                                    });
+
+                                    const ticketData = await ticketResponse.json();
+
+                                    if (ticketData.success) {
+                                        startButton.disabled = false;
+                                        dropBall();
+                                    } else {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'There was a problem deducting your tickets.',
+                                            icon: 'error',
+                                            confirmButtonText: 'Ok',
+                                            background: '#3e09b8',
+                                            color: '#fff',
+                                            iconColor: '#fff'
+                                        });
+                                    }
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'You dont have enough tickets to play this game!',
+                                icon: 'error',
+                                confirmButtonText: 'Ok',
+                                background: '#3e09b8',
+                                color: '#fff',
+                                iconColor: '#fff'
+                            })
+
+                            startButton.disabled = false;
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'An error ocurred. Try again!',
+                            icon: 'error',
+                            confirmButtonText: 'Ok',
+                            background: '#3e09b8',
+                            color: '#fff',
+                            iconColor: '#fff'
+                        })
+
+                        startButton.disabled = false;
+                    }
+                });
+            </script>
+</body>
+
+</html>

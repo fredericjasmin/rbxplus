@@ -1,0 +1,275 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('/public/image/background.PNG');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+p{
+    margin-top: 15px;
+    background-color: #1a0a69;
+    height: 150px;
+    width: 100%;
+    padding: 5px;
+}
+#goal{
+    color: blueviolet;
+}
+a{
+    text-decoration: none;
+    color: aqua;
+}
+
+ 
+.shining-text {
+    font-size: 50px;
+    color: #fefa00;
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0%, 100% {
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
+    }
+    50% {
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #000000;
+    }
+}
+
+#containerrr{
+  width: 90%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  height: 100%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+#maincontent{
+    grid-column: 1/-1;
+    
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+
+}
+#textp{
+    color: white;
+}
+
+.marquee-container {
+    margin-top: 10px;
+    grid-column: 1/-1;
+    border: 5px solid rgb(255, 255, 255);
+    background-color: rgb(13, 21, 65);
+    border-radius: 10px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-family: 600;
+}
+
+.marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+}
+
+.marquee p {
+    display: inline;
+    padding-right: 100%; 
+    white-space: nowrap;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%); 
+    }
+    100% {
+        transform: translateX(-230%); 
+    }
+}
+
+#counterrobux{
+    font-size: 120px;
+    color: rgb(255, 255, 255);
+    margin-top: 30px;
+}
+
+#secondarycontent{
+    grid-column: 1/-1;
+    background-color: #1a0a69;
+    height: 550px;
+    margin-bottom: 102px;
+    text-align: center;
+  border-radius: 30px;
+    flex-direction: column;
+}
+
+.h1second{
+    color: rgb(255, 0, 191);
+    margin-top: 30px;
+    font-size: 50px;
+    padding: 5px;
+    
+    margin-bottom: 30px;
+}
+
+.thirdtext{
+    color: white;
+    padding: 5px;
+}
+
+.testprize{
+    margin-top: 30px;
+    background-color: #a908fa;
+    text-decoration: none;
+    padding: 5px;
+    color: white;
+    font-size: 20px;
+
+}
+
+@media (max-width: 956px){
+    #counterrobux{
+        font-size: 100px;
+
+        margin-top: 30px;
+    }
+    #secondarycontent{
+        grid-column: 1/-1;
+        background-color: #1a0a69;
+        height: 550px;
+        margin-bottom: 102px;
+        text-align: center;
+      border-radius: 30px;
+        flex-direction: column;
+    }
+    
+    .h1second{
+        color: rgb(255, 0, 191);
+        margin-top: 30px;
+        font-size: 40px;
+        padding: 5px;
+        margin-bottom: 30px;
+    }
+    
+    .thirdtext{
+        color: white;
+        padding: 5px;
+        font-size: 20px;
+    }
+    
+    
+    .testprize{
+        margin-top: 30px;
+        background-color: #a908fa;
+        text-decoration: none;
+        padding: 5px;
+        color: white;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 721px){
+    #counterrobux{
+        font-size: 80px;
+
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 574px){
+    #counterrobux{
+        font-size: 50px;
+
+        margin-top: 30px;
+    }
+    #secondarycontent{
+        grid-column: 1/-1;
+        background-color: #1a0a69;
+        height: 550px;
+        margin-bottom: 102px;
+        text-align: center;
+      border-radius: 30px;
+        flex-direction: column;
+    }
+    
+    .h1second{
+        color: rgb(255, 0, 191);
+        margin-top: 30px;
+        font-size: 30px;
+        padding: 5px;
+        margin-bottom: 30px;
+    }
+    
+    .thirdtext{
+        color: white;
+        padding: 5px;
+        font-size: 18px;
+    }
+    
+    .testprize{
+        margin-top: 30px;
+        background-color: #a908fa;
+        text-decoration: none;
+        padding: 5px;
+        color: white;
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 382px){
+    #counterrobux{
+        font-size: 40px;
+
+        margin-top: 30px;
+    }
+    .shining-text {
+        font-size: 40px;
+        color: #fefa00;
+        animation: shine 3s infinite;
+    }
+    #secondarycontent{
+        grid-column: 1/-1;
+        background-color: #1a0a69;
+        height: 550px;
+        margin-bottom: 102px;
+        text-align: center;
+      border-radius: 30px;
+        flex-direction: column;
+    }
+    
+    .h1second{
+        color: rgb(255, 0, 191);
+        margin-top: 30px;
+        font-size: 20px;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .thirdtext{
+        color: white;
+        padding: 5px;
+        font-size: 16px;
+    }
+    
+    .testprize{
+        margin-top: 30px;
+        background-color: #a908fa;
+        text-decoration: none;
+        padding: 5px;
+        color: white;
+        font-size: 15px;
+    }
+}

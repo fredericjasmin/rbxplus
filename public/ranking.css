@@ -1,0 +1,895 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#DASHBOARD{
+    color: blueviolet;
+}
+#texts{
+    color:white;
+}
+body {
+    background-image: url('/public/image/background.PNG');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+ 
+.shining-text {
+    font-size: 50px;
+    color: #ffffff;
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0%, 100% {
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #d7c9c9;
+    }
+    50% {
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #d7c9c9;
+    }
+}
+
+#containerrr{
+  width: 90%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  height: 100%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+#maincontent{
+    grid-column: 1/-1;
+    
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+
+}
+#textp{
+    color: white;
+}
+
+.marquee-container {
+    margin-top: 10px;
+    grid-column: 1/-1;
+    border: 5px solid rgb(255, 255, 255);
+    background-color: rgb(13, 21, 65);
+    border-radius: 10px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-family: 600;
+}
+
+.marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+}
+
+.marquee p {
+    display: inline;
+    padding-right: 100%; 
+    white-space: nowrap;
+}
+.rbxammount{
+    color: yellow;
+}
+@keyframes marquee {
+    0% {
+        transform: translateX(100%); 
+    }
+    100% {
+        transform: translateX(-230%); 
+    }
+}
+
+#dailyboard{
+    grid-column: 1/-1;
+
+    position: relative;
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    gap: 100px;
+}
+
+.bordx{
+    position: relative;
+    background-color: rgb(72, 14, 126);
+    height: 250px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px rgb(255, 255, 255) solid;
+    width: 200px;
+    border-radius: 35px;
+
+}
+
+#boardpopular{
+    position: relative;
+    background-color: rgb(72, 14, 126);
+    height: 250px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px rgb(0, 255, 213) solid;
+    width: 200px;
+    position: relative;
+    top: -50px;
+    border-radius: 35px;
+}
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0); 
+    }
+    50% {
+        transform: translateY(-20px); 
+    }
+}
+
+.bordx, #boardpopular {
+    animation: float 3s ease-in-out infinite; 
+}
+.imagecircle{
+    border-radius: 50px;
+    background-color: #ffffff;
+    width: 80px;
+    position: relative;
+    overflow: hidden;
+    top: -10px;
+    height: 80px;
+}
+img{
+    height: 100%;
+}
+#lastboard{
+    grid-column: 1/-1;
+    background-color: transparent;
+    border-radius: 50px;
+    text-align: center;
+    background-color: rgb(23, 13, 93);
+    width: 60%;
+    border: 4px solid white;
+    margin: 0 auto;
+    justify-content: center;
+    height: auto;
+}
+
+
+
+#texts{
+    font-size: 35px;
+    margin-top: 40px;
+}
+
+#weeklyboard{
+ 
+    border-radius: 20px;
+
+    position: relative;
+    
+}
+.weeklyuser{
+    position: relative;
+    margin-bottom: 80px;
+    top: 30px;
+    margin-top: 1px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background-color: transparent;
+
+}
+h5{
+    color: white;
+    font-size: 15px;
+    margin-left: 20px;
+    height: 40px;
+    border-radius: 10px;
+    color: yellow;
+    text-align: center;
+    padding: 9px;
+    background-color: rgb(119, 0, 247);
+    width: 200px;
+}
+#usertext{
+    font-size: 15px;
+    width: 200px;
+    background-color: rgb(119, 0, 247);
+    
+    height: 40px;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 9px;
+
+}
+.imglastboard{
+    height: 80px;
+    border-radius: 100px;
+    background-color: #ffffff;
+    width: 80px;
+    overflow: hidden;
+}
+
+@media (max-width: 1050px){
+    h5{
+        color: white;
+        font-size: 14px;
+        margin-left: 20px;
+        height: 40px;
+        border-radius: 10px;
+        color: yellow;
+        text-align: center;
+        padding: 9px;
+        background-color: rgb(119, 0, 247);
+        width: 100px;
+    }
+    #usertext{
+        font-size: 15px;
+        width: 150px;
+        background-color: rgb(119, 0, 247);
+        
+        height: 40px;
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+        padding: 9px;
+    
+    }
+  
+    .imglastboard{
+        height: 70px;
+        width: 70px;
+        text-align: center;
+        background-color: #ffffff;
+        top: -5px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+    }
+    .weeklyuser{
+        position: relative;
+        margin-bottom: 50px;
+        top: 30px;
+        margin-top: 1px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        background-color: transparent;
+    
+    }
+}
+
+@media (max-width: 781px){
+
+    .rbxammount{
+        color: yellow;
+        font-size: 12px;
+    }
+    h2{
+        font-size: 15px;
+    }
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%); 
+        }
+        100% {
+            transform: translateX(-230%); 
+        }
+    }
+    
+    #dailyboard{
+        grid-column: 1/-1;
+    
+        position: relative;
+        display: flex;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        gap: 30px;
+    }
+    
+    .bordx{
+        position: relative;
+        background-color: rgb(72, 14, 126);
+        height: 250px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px rgb(255, 255, 255) solid;
+        width: 200px;
+        border-radius: 35px;
+    
+    }
+    
+    #boardpopular{
+        position: relative;
+        background-color: rgb(72, 14, 126);
+        height: 250px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px rgb(0, 255, 213) solid;
+        width: 200px;
+        position: relative;
+        top: -50px;
+        border-radius: 35px;
+    }
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0); 
+        }
+        50% {
+            transform: translateY(-20px); 
+        }
+    }
+    
+    .bordx, #boardpopular {
+        animation: float 3s ease-in-out infinite; 
+    }
+    .imagecircle{
+        border-radius: 50px;
+        background-color: #ffffff;
+        width: 60px;
+        position: relative;
+        top: -10px;
+        height: 60px;
+    }
+
+    #lastboard{
+        grid-column: 1/-1;
+        background-color: transparent;
+        border-radius: 50px;
+        text-align: center;
+        background-color: rgb(23, 13, 93);
+        width: 80%;
+        border: 4px solid white;
+        margin: 0 auto;
+        justify-content: center;
+        height: 700px;
+    }
+    h5{
+        color: white;
+        font-size: 11px;
+        margin-left: 20px;
+        height: 40px;
+        border-radius: 10px;
+        color: yellow;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(119, 0, 247);
+        width: 60px;
+    }
+    #lastboard{
+        grid-column: 1/-1;
+        background-color: transparent;
+        border-radius: 50px;
+        text-align: center;
+        background-color: rgb(23, 13, 93);
+        width: 90%;
+        border: 4px solid white;
+        margin: 0 auto;
+        justify-content: center;
+        height: 810px;
+    }
+    #usertext{
+        font-size: 12px;
+        width: 120px;
+        background-color: rgb(119, 0, 247);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+
+    
+    }
+    .imglastboard{
+        height: 60px;
+        width: 60px;
+        text-align: center;
+        background-color: #ffffff;
+        top: -2px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+    }
+    .weeklyuser{
+        position: relative;
+        margin-bottom: 40px;
+        top: 30px;
+        margin-top: 1px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        background-color: transparent;
+    
+    }
+}
+
+
+@media (max-width: 562px){
+    #lastboard{
+        grid-column: 1/-1;
+        background-color: transparent;
+        border-radius: 50px;
+        text-align: center;
+        background-color: rgb(23, 13, 93);
+        width: 90%;
+        border: 4px solid white;
+        margin: 0 auto;
+        justify-content: center;
+        height: 720px;
+    }
+    .rbxammount{
+        color: yellow;
+        font-size: 10px;
+    }
+    h2{
+        font-size: 12px;
+    }
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%); 
+        }
+        100% {
+            transform: translateX(-230%); 
+        }
+    }
+    
+    #dailyboard{
+        grid-column: 1/-1;
+    
+        position: relative;
+        display: flex;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        gap: 20px;
+    }
+    
+    .bordx{
+        position: relative;
+        background-color: rgb(72, 14, 126);
+        height: 220px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px rgb(255, 255, 255) solid;
+        width: 200px;
+        border-radius: 35px;
+    
+    }
+    
+    #boardpopular{
+        position: relative;
+        background-color: rgb(72, 14, 126);
+        height: 220px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px rgb(0, 255, 213) solid;
+        width: 200px;
+        position: relative;
+        top: -50px;
+        border-radius: 35px;
+    }
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0); 
+        }
+        50% {
+            transform: translateY(-20px); 
+        }
+    }
+    
+    .bordx, #boardpopular {
+        animation: float 3s ease-in-out infinite; 
+    }
+    .imagecircle{
+        border-radius: 50px;
+        background-color: #ffffff;
+        width: 50px;
+        position: relative;
+        top: -10px;
+        height: 50px;
+    }
+    h5{
+        color: white;
+        font-size: 10px;
+        margin-left: 20px;
+        height: 30px;
+        border-radius: 10px;
+        color: yellow;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(119, 0, 247);
+        width: 60px;
+    }
+    #usertext{
+        font-size: 9px;
+        width: 100px;
+        background-color: rgb(119, 0, 247);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+
+    
+    }
+    .imglastboard{
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        background-color: #ffffff;
+        top: -2px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+    }
+    .weeklyuser{
+        position: relative;
+        margin-bottom: 20px;
+        top: 30px;
+        margin-top: 1px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        background-color: transparent;
+    
+    }
+}
+
+@media (max-width: 399px){
+    .rbxammount{
+        color: yellow;
+        font-size: 8px;
+    }
+    h2{
+        font-size: 10px;
+    }
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%); 
+        }
+        100% {
+            transform: translateX(-230%); 
+        }
+    }
+    
+    #dailyboard{
+        grid-column: 1/-1;
+    
+        position: relative;
+        display: flex;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        gap: 10px;
+    }
+    
+    .bordx{
+        position: relative;
+        background-color: rgb(72, 14, 126);
+        height: 200px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px rgb(255, 255, 255) solid;
+        width: 200px;
+        border-radius: 35px;
+    
+    }
+    
+    #boardpopular{
+        position: relative;
+        background-color: rgb(72, 14, 126);
+        height: 200px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px rgb(0, 255, 213) solid;
+        width: 200px;
+        position: relative;
+        top: -50px;
+        border-radius: 35px;
+    }
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0); 
+        }
+        50% {
+            transform: translateY(-20px); 
+        }
+    }
+    
+    .bordx, #boardpopular {
+        animation: float 3s ease-in-out infinite; 
+    }
+    .imagecircle{
+        border-radius: 50px;
+        background-color: #ffffff;
+        width: 50px;
+        position: relative;
+        top: -10px;
+        height: 50px;
+    }
+
+    h5{
+        color: white;
+        font-size: 10px;
+        margin-left: 20px;
+        height: 30px;
+        border-radius: 10px;
+        color: yellow;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(119, 0, 247);
+        width: 60px;
+    }
+    #usertext{
+        font-size: 9px;
+        width: 90px;
+        background-color: rgb(119, 0, 247);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+
+    
+    }
+    .imglastboard{
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        background-color: #ffffff;
+        top: -2px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+    }
+    .weeklyuser{
+        position: relative;
+        margin-bottom: 10px;
+        top: 30px;
+        margin-top: 1px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        background-color: transparent;
+    
+    }
+    #texts{
+        font-size: 28px;
+        margin-top: 40px;
+    }
+    #lastboard{
+        grid-column: 1/-1;
+        background-color: transparent;
+        border-radius: 50px;
+        text-align: center;
+        background-color: rgb(23, 13, 93);
+        width: 90%;
+        border: 4px solid white;
+        margin: 0 auto;
+        justify-content: center;
+        height: 620px;
+    }
+}
+
+@media (max-width: 334px){
+
+    .rbxammount{
+        color: yellow;
+        font-size: 6px;
+    }
+    h2{
+        font-size: 8px;
+    }
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%); 
+        }
+        100% {
+            transform: translateX(-230%); 
+        }
+    }
+    
+    #dailyboard{
+        grid-column: 1/-1;
+    
+        position: relative;
+        display: flex;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        gap: 6px;
+    }
+    
+    .bordx{
+        position: relative;
+        background-color: rgb(72, 14, 126);
+        height: 200px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px rgb(255, 255, 255) solid;
+        width: 200px;
+        border-radius: 35px;
+    
+    }
+    
+    #boardpopular{
+        position: relative;
+        background-color: rgb(72, 14, 126);
+        height: 200px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px rgb(0, 255, 213) solid;
+        width: 200px;
+        position: relative;
+        top: -50px;
+        border-radius: 35px;
+    }
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0); 
+        }
+        50% {
+            transform: translateY(-20px); 
+        }
+    }
+    
+    .bordx, #boardpopular {
+        animation: float 3s ease-in-out infinite; 
+    }
+    .imagecircle{
+        border-radius: 50px;
+        background-color: #ffffff;
+        width: 40px;
+        position: relative;
+        top: -10px;
+        height: 40px;
+    }
+    h5{
+        color: white;
+        font-size: 7px;
+        margin-left: 20px;
+        height: 30px;
+        border-radius: 10px;
+        color: yellow;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(119, 0, 247);
+        width: 50px;
+    }
+    #usertext{
+        font-size: 7px;
+        width: 75px;
+        background-color: rgb(119, 0, 247);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+
+    
+    }
+    .imglastboard{
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        background-color: #ffffff;
+        top: -2px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+    }
+    .weeklyuser{
+        position: relative;
+        margin-bottom: 4px;
+        top: 30px;
+        margin-top: 1px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        background-color: transparent;
+    
+    }
+    #texts{
+        font-size: 28px;
+        margin-top: 40px;
+    }
+    #lastboard{
+        grid-column: 1/-1;
+        background-color: transparent;
+        border-radius: 50px;
+        text-align: center;
+        background-color: rgb(23, 13, 93);
+        width: 90%;
+        border: 4px solid white;
+        margin: 0 auto;
+        justify-content: center;
+        height: 600px;
+    }
+}

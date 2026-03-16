@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/preload.css">
+</head>
+<body>
+    <div id="preloader">
+        <div id="backreload">
+            <img src='/public/image/Gatoanimacion.gif' id="cat" alt="cat">
+            <div class="loading-bar"></div>
+        </div>
+      
+    </div>
+    <div id="content">
+       
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const preloader = document.getElementById("preloader");
+            const content = document.getElementById("content");
+
+            preloader.style.display = "block";
+            content.style.display = "none"; 
+
+            window.addEventListener("load", function() {
+                setTimeout(function() {
+                    preloader.style.opacity = "0";
+                    setTimeout(function() {
+                        preloader.style.display = "none";
+                        content.style.display = "block"; 
+                        document.body.style.overflow = "auto";  
+                    }, 500);
+                }, 400); 
+            });
+        });
+    </script>
+</body>
+</html>

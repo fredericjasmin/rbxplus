@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/admin.css">
+</head>
+<body>
+    <form method="post" action="/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqw" id="login-form">
+        <input type="text" placeholder="username" name="username"> <br>
+        <input type="password" placeholder="password" name="password"> <br>
+        <button type="submit">Login</button>
+        <p>ignorar esto xdddd</p>
+    </form>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = new URLSearchParams(formData).toString();
+            const csrfToken = document.getElementById('_csrf').value;
+            console.log(csrfToken)
+            
+            try {
+                const response = await fetch('/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqw', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'CSRF-Token': csrfToken },
+                    body: data
+                });
+
+                console.log(response)
+
+                if (!response.ok) {
+                    throw new Error('Login failed');
+                }
+
+                const result = await response.json();
+                const { token } = result;
+
+                
+                localStorage.setItem('authToken', token);
+
+               
+                window.location.href = `/admin/ASFASJFQWFQ@@Idqwriwqqidfqwfqwfoqwfqwoqwqwfjqwasdasdad?authToken=${token}`;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Login failed');
+            }
+        });
+    </script>
+
+</body>
+</html>

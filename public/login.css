@@ -1,0 +1,756 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('/public/image/background.PNG');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+#container{
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  
+}
+
+#login {
+   margin-top: 90px;
+    position: relative;
+    width: 600px; 
+    height: 550px;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+ 
+    
+    
+
+    
+}
+
+#log1{
+   
+    background-color: rgb(113, 4, 215);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    border-top-left-radius:50px ;
+    border-top-right-radius:50px ;
+}
+#warn{
+    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+    flex-direction: column;
+   
+}
+#loginForm{
+
+    margin-top: -90px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+  
+}
+#tittle {
+    margin-top: 130px;
+    font-size: 30px;
+    color: white;
+    
+}
+
+#advertise {
+    color: rgb(146, 73, 215);
+    margin-bottom: 15px;
+    font-size: 20px;
+   
+}
+
+
+#username {
+    width: 360px;
+    height: 55px;
+    padding-left: 20px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 80px;
+    font-family:sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+}
+
+:placeholder-shown {
+    padding-left: 4px;
+    font-size: 18px;
+}
+
+#okbut {
+    border: none;
+    height: 65px;
+    width: 270px;
+    border-bottom: none;
+    
+    border-top: none;
+    border-right: none;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    background-color: blueviolet;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 25px;
+    top: 5px;
+}
+
+#okbut::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, white);
+    transition: left 0.5s ease;
+    z-index: 0;
+}
+
+#okbut:hover::before {
+    left: 60%;
+}
+
+#okbut:hover {
+    color: white;
+}
+
+#okbut span {
+    position: relative;
+    z-index: 1;
+}
+@media (max-width: 670px) {#login {
+    margin-top: 90px;
+     position: relative;
+     width: 450px; 
+     height: 450px;
+     background-color: rgba(0, 0, 0, 0.1);
+     display: flex;
+     flex-direction: column;
+  
+     #log1{
+   
+        background-color: rgb(113, 4, 215);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 15px;
+        height: 50px;
+        border-top-left-radius:50px ;
+        border-top-right-radius:50px ;
+    }
+     
+    #warn{
+        margin-top: -35px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: white;
+        flex-direction: column;
+       
+    }
+    #loginForm{
+
+        margin-top: -80px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        align-items: center;
+      
+    }
+
+    #okbut {
+        border: none;
+        height: 65px;
+        width: 270px;
+        border-bottom: none;
+        
+        border-top: none;
+        border-right: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+        background-color: blueviolet;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 25px;
+        top: 5px;
+    }
+     
+    #tittle {
+        margin-top: 130px;
+        font-size: 25px;
+        color: white;
+        
+    }
+    
+    #advertise {
+        color: rgb(146, 73, 215);
+        margin-bottom: 15px;
+        font-size: 17px;
+       
+    }
+    
+ }}
+ @media (max-width: 531px) {#login {
+    margin-top: 90px;
+     position: relative;
+     width: 400px; 
+     height: 430px;
+     background-color: rgba(0, 0, 0, 0.1);
+     display: flex;
+     flex-direction: column;
+  
+     #log1{
+   
+        background-color: rgb(113, 4, 215);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 15px;
+        height: 50px;
+        border-top-left-radius:50px ;
+        border-top-right-radius:50px ;
+    }
+    #flash{
+        color: rgb(255, 9, 202);
+        font-size: 15px;
+        background-color:rgb(60, 5, 111);
+        width: 95%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        
+    }
+    #errordiv{
+        margin-top: 5px;
+        width: 100%;
+      
+    
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        
+    }
+    #warn{
+        margin-top: -35px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: white;
+        flex-direction: column;
+       
+    }
+
+    #loginForm{
+
+        margin-top: -80px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        align-items: center;
+      
+    }
+
+    #okbut {
+        border: none;
+        height: 55px;
+        width: 270px;
+        border-bottom: none;
+        
+        border-top: none;
+        border-right: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+        background-color: blueviolet;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 25px;
+        top: 5px;
+    }
+     
+    #tittle {
+        margin-top: 130px;
+        font-size: 25px;
+        color: white;
+        
+    }
+    
+    #advertise {
+        color: rgb(146, 73, 215);
+        margin-bottom: 15px;
+        font-size: 17px;
+       
+    }
+    
+ }}
+ @media (max-width: 451px) {#login {
+    margin-top: 90px;
+     position: relative;
+     width: 350px; 
+     height: 380px;
+     background-color: rgba(0, 0, 0, 0.1);
+     display: flex;
+     flex-direction: column;
+  
+     #log1{
+   
+        background-color: rgb(113, 4, 215);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 15px;
+        height: 50px;
+        border-top-left-radius:50px ;
+        border-top-right-radius:50px ;
+    }
+     
+    #warn{
+        margin-top: -65px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: white;
+        flex-direction: column;
+       
+    }
+
+    #loginForm{
+
+        margin-top: -80px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        align-items: center;
+      
+    }
+
+    #okbut {
+        border: none;
+        height: 45px;
+        width: 220px;
+        border-bottom: none;
+        
+        border-top: none;
+        border-right: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+        background-color: blueviolet;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 15px;
+        top: 5px;
+    }
+     
+    #tittle {
+        margin-top: 130px;
+        font-size: 20px;
+        color: white;
+        
+    }
+    
+    #advertise {
+        color: rgb(146, 73, 215);
+        margin-bottom: 15px;
+        font-size: 14px;
+       
+    }
+
+    #username {
+        width: 300px;
+        height: 50px;
+        padding-left: 20px;
+        border: none;
+        border-radius: 10px;
+        margin-top: 80px;
+        margin-bottom: 10px;
+    }
+    
+    
+ }}
+
+ @media (max-width: 384px) {#login {
+    margin-top: 60px;
+     position: relative;
+     width: 300px; 
+     height: 350px;
+     background-color: rgba(0, 0, 0, 0.1);
+     display: flex;
+     flex-direction: column;
+     #flash{
+        color: rgb(255, 9, 202);
+        font-size: 13px;
+        background-color:rgb(60, 5, 111);
+        width: 95%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        
+    }
+    #errordiv{
+        margin-top: 5px;
+        width: 100%;
+      
+    
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        
+    }
+     #log1{
+   
+        background-color: rgb(113, 4, 215);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 15px;
+        height: 50px;
+        border-top-left-radius:50px ;
+        border-top-right-radius:50px ;
+    }
+     
+    #warn{
+        margin-top: -65px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: white;
+        flex-direction: column;
+       
+    }
+
+    #loginForm{
+
+        margin-top: -80px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        align-items: center;
+      
+    }
+
+    #okbut {
+        border: none;
+        height: 40px;
+        width: 200px;
+        border-bottom: none;
+        
+        border-top: none;
+        border-right: none;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+        background-color: blueviolet;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 10px;
+        top: 5px;
+    }
+     
+    #tittle {
+        margin-top: 130px;
+        font-size: 16px;
+        color: white;
+        
+    }
+    
+    #advertise {
+        color: rgb(146, 73, 215);
+        margin-bottom: 15px;
+        font-size: 11px;
+       
+    }
+
+    #username {
+        width: 250px;
+        height: 40px;
+        padding-left: 20px;
+        border: none;
+        font-size: 15px;
+        border-radius: 10px;
+        margin-top: 80px;
+        margin-bottom: 10px;
+    }
+    
+    
+ }}
+
+ @media (max-width: 344px) {#login {
+    margin-top: 40px;
+     position: relative;
+     width: 250px; 
+     height: 320px;
+     background-color: rgba(0, 0, 0, 0.1);
+     display: flex;
+     flex-direction: column;
+  
+     #flash{
+        color: rgb(255, 9, 202);
+        font-size: 11px;
+        background-color:rgb(60, 5, 111);
+        width: 95%;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        
+    }
+    #errordiv{
+        margin-top: 5px;
+        width: 100%;
+      
+    
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        
+    }
+     #log1{
+   
+        background-color: rgb(113, 4, 215);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 12px;
+        height: 50px;
+        border-top-left-radius:50px ;
+        border-top-right-radius:50px ;
+    }
+     
+    #warn{
+        margin-top: -75px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: white;
+        flex-direction: column;
+       
+    }
+
+    #loginForm{
+
+        margin-top: -80px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        align-items: center;
+      
+    }
+
+    #okbut {
+        border: none;
+        height: 40px;
+        width: 180px;
+        border-bottom: none;
+        
+        border-top: none;
+        border-right: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+        background-color: blueviolet;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 10px;
+        top: 5px;
+    }
+     
+    #tittle {
+        margin-top: 130px;
+        font-size: 12px;
+        color: white;
+        
+    }
+    
+    #advertise {
+        color: rgb(146, 73, 215);
+        margin-bottom: 15px;
+        font-size: 9px;
+       
+    }
+
+    #username {
+        width: 185px;
+        height: 35px;
+        padding-left: 20px;
+        border: none;
+        font-size: 12px;
+        border-radius: 10px;
+        margin-top: 80px;
+        margin-bottom: 10px;
+    }
+    
+    
+ }}
+
+ @media (max-width: 281px) {#login {
+    margin-top: 50px;
+     position: relative;
+     width: 210px; 
+     height: 270px;
+     background-color: rgba(0, 0, 0, 0.1);
+     display: flex;
+     flex-direction: column;
+  
+     #log1{
+   
+        background-color: rgb(113, 4, 215);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 12px;
+        height: 50px;
+        border-top-left-radius:50px ;
+        border-top-right-radius:50px ;
+    }
+      
+    #flash{
+        color: rgb(255, 9, 202);
+        font-size: 11px;
+        background-color:rgb(60, 5, 111);
+        width: 95%;
+        height: 27px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        
+    }
+    #errordiv{
+        margin-top: 5px;
+        width: 100%;
+      
+    
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        
+    }
+    #warn{
+        margin-top: -85px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: white;
+        flex-direction: column;
+       
+    }
+
+    #loginForm{
+
+        margin-top: -80px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        align-items: center;
+      
+    }
+
+    #okbut {
+        border: none;
+        height: 35px;
+        width: 170px;
+        border-bottom: none;
+        
+        border-top: none;
+        border-right: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+        background-color: blueviolet;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-top: 3px;
+        top: 5px;
+    }
+     
+    #tittle {
+        margin-top: 130px;
+        font-size: 10px;
+        color: white;
+        
+    }
+    
+    #advertise {
+        color: rgb(146, 73, 215);
+        margin-bottom: 15px;
+        font-size: 8px;
+       
+    }
+
+    #username {
+        width: 175px;
+        height: 32px;
+        padding-left: 20px;
+        border: none;
+        font-size: 12px;
+        border-radius: 10px;
+        margin-top: 80px;
+        margin-bottom: 10px;
+    }
+    
+    
+ }}

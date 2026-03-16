@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+  <link rel="stylesheet" href="/public/mines.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+      <%- include('partials/notifications') %>
+        <div id="game-container">
+          <div id="controls">
+            <h2 id="textlogo">MINES</h2>
+            <h2 id="robux-earned" data-translate="earned"></h2>
+            <button id="startbutton"><i class="lni lni-ticket" style="margin-right: 8px;"></i>6</button>
+            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+            <button id="withdraw" style="display: none;">Withdraw</button>
+          </div>
+          <div id="board">
+            <div>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+            </div>
+            <div>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+            </div>
+            <div>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+            </div>
+            <div>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+            </div>
+            <div>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+              <h1 class="minesboard"></h1>
+            </div>
+          </div>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+          const mineCounter = document.getElementById('mine-counter');
+          const startButton = document.getElementById('startbutton');
+          const withdrawButton = document.getElementById('withdraw');
+          const csrfToken = document.getElementById('_csrf').value;
+          const board = document.getElementById('board');
+
+          let totalMines = 3;
+          let selectedCell = null;
+          let gameOver = false;
+          const totalSafeCells = 22;
+
+          const robuxRewards = [
+            0.30, 0.60, 0.90, 1.50, 2.40, 3.30, 4.20, 5.40, 6.60, 7.80,
+            9.60, 11.40, 13.20, 15.00, 16.80, 19.20, 21.60, 24.00, 26.40, 28.80,
+            32.40, 35.00
+          ];
+
+          let safeCellsRevealed = 0;
+          let robuxEarned = 0;
+
+          startButton.addEventListener('click', async function () {
+
+            startButton.disabled = true;
+
+            try {
+
+              const response = await fetch('/games/mines', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'CSRF-Token': csrfToken,
+                },
+                body: JSON.stringify({ robloxUser: `<%- user.username %>` })
+              });
+
+              const data = await response.json();
+
+              if (data.hasTickets) {
+                startGame();
+              } else {
+                Swal.fire({
+                  title: 'Error!',
+                  text: 'You dont have enough tickets to play this game!',
+                  icon: 'error',
+                  confirmButtonText: 'Ok',
+                  background: '#3e09b8',
+                  color: '#fff',
+                  iconColor: '#fff'
+                })
+
+                startButton.disabled = false;
+              }
+            } catch (error) {
+              console.error('Error:', error);
+              Swal.fire({
+                title: 'Error!',
+                text: 'An error ocurred. Try again!',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                background: '#3e09b8',
+                color: '#fff',
+                iconColor: '#fff'
+              })
+
+              startButton.disabled = false;
+            }
+          });
+
+          function startGame() {
+            totalMines = parseInt(totalMines);
+            safeCellsRevealed = 0;
+            gameOver = false;
+
+            document.getElementById('robux-earned').textContent = `Robux Earned: $0.00`;
+
+            startButton.style.display = 'none';
+            startButton.disabled = false;
+            withdrawButton.style.display = 'block';
+            showNotification1();
+
+            board.innerHTML = '';
+
+
+            for (let row = 0; row < 5; row++) {
+
+              const rowDiv = document.createElement('div');
+
+
+              for (let col = 0; col < 5; col++) {
+                const cell = document.createElement('div');
+                cell.classList.add('h1-cell');
+                cell.setAttribute('data-index', row * 5 + col);
+                rowDiv.appendChild(cell);
+
+                cell.addEventListener('click', function () {
+                  if (!gameOver) {
+                    revealCell(cell);
+                  }
+                });
+
+                cell.textContent = '';
+              }
+
+
+              board.appendChild(rowDiv);
+            }
+
+            placeMines();
+          }
+
+          function placeMines() {
+            const cells = board.querySelectorAll('.h1-cell');
+            const cellArray = Array.from(cells);
+
+            let minesPlaced = 0;
+            const mineIndices = [];
+
+            while (minesPlaced < totalMines) {
+              const randomIndex = Math.floor(Math.random() * cellArray.length);
+              if (!mineIndices.includes(randomIndex)) {
+                mineIndices.push(randomIndex);
+                minesPlaced++;
+              }
+            }
+
+
+            window.mineIndices = mineIndices;
+          }
+          function selectCell(cell) {
+            if (gameOver) return;
+
+
+            if (selectedCell) {
+              selectedCell.classList.remove('selected');
+            }
+
+
+            cell.classList.add('selected');
+            selectedCell = cell;
+          }
+
+          let gameEndedByWithdraw = false;
+
+          async function revealCell(cell) {
+            if (cell.classList.contains('revealed') || gameOver) {
+              return;
+            }
+
+            // Obtener los índices de minas desde window
+            const mineIndices = window.mineIndices || [];
+            const cellIndex = parseInt(cell.getAttribute('data-index'));
+
+            if (mineIndices.includes(cellIndex)) {
+              robuxEarned = 0;
+              document.getElementById('robux-earned').textContent = `Robux Earned: ${robuxEarned}`;
+              cell.style.backgroundColor = 'red';
+              cell.style.backgroundImage = 'url("/public/image/bomb.webp")';
+              cell.style.backgroundSize = 'cover';
+              endGame(false);
+              lostnoti();
+            } else {
+              // Esta celda es segura
+              cell.style.backgroundColor = 'blueviolet';
+              cell.textContent = '';
+
+              // Marcar como revelada y desactivar eventos de clic
+              cell.classList.add('revealed');
+              cell.style.pointerEvents = 'none';
+
+              // Incrementar el contador de celdas seguras reveladas
+              safeCellsRevealed++;
+              robuxEarned = robuxRewards[safeCellsRevealed - 1];
+
+              // Verificar si todas las celdas seguras han sido reveladas
+              if (safeCellsRevealed === totalSafeCells) {
+                gameEndedByWithdraw = false;
+                endGame(true);
+                addRobuxToBalance(robuxEarned);
+              }
+
+              // Actualizar la UI con los Robux ganados
+              document.getElementById('robux-earned').textContent = `Robux Earned: ${robuxEarned}`;
+            }
+          }
+
+          let notificationTimeout = null;
+
+          document.getElementById('withdraw').addEventListener('click', function () {
+            showConfirmation();
+          });
+
+          function showNotification1() {
+            // Mostrar la notificación
+            Swal.fire({
+              title: 'Success!',
+              text: 'Game started',
+              icon: 'success',
+              confirmButtonText: 'Ok',
+              background: '#3e09b8',
+              color: '#fff',
+              iconColor: '#fff'
+            })
+          }
+
+
+          function lostnoti() {
+            Swal.fire({
+              title: 'Error!',
+              text: 'You just lost!',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+              background: '#3e09b8',
+              color: '#fff',
+              iconColor: '#fff'
+            })
+          }
+
+          function showConfirmation() {
+            Swal.fire({
+              title: 'Are you sure?',
+              text: 'Do you want to withdraw your earned Robux?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes',
+              cancelButtonText: 'No',
+              reverseButtons: true,
+              background: '#3e09b8',
+              color: '#fff',
+              iconColor: '#fff'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                withdrawRobux();
+              }
+            });
+          }
+          async function withdrawRobux() {
+            try {
+              const response = await fetch('/games/mines/withdraw', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'CSRF-Token': csrfToken,
+                },
+                body: JSON.stringify({ robux: robuxEarned, robloxUser: `<%- user.username %>` })
+              });
+
+              const data = await response.json();
+              if (data.success) {
+                gameEndedByWithdraw = true;
+                endGame(true);
+                Swal.fire({
+                  title: 'Success!',
+                  text: `You made a withdraw of ${robuxEarned}R$!`,
+                  icon: 'success',
+                  confirmButtonText: 'Ok',
+                  background: '#3e09b8',
+                  color: '#fff',
+                  iconColor: '#fff'
+                })
+                resetBoard()
+              } else {
+                Swal.fire({
+                  title: 'Error!',
+                  text: `There was an error making the withdrawal!`,
+                  icon: 'error',
+                  confirmButtonText: 'Ok',
+                  background: '#3e09b8',
+                  color: '#fff',
+                  iconColor: '#fff'
+                })
+              }
+            } catch (error) {
+              console.error('Error:', error);
+              Swal.fire({
+                title: 'Error!',
+                text: `There was an error. Try again!`,
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                background: '#3e09b8',
+                color: '#fff',
+                iconColor: '#fff'
+              })
+            }
+          }
+
+          async function addRobuxToBalance(robux) {
+            const data = {
+              username: '<%- user.username %>',
+              robux: robux
+            }
+
+            try {
+              const response = await fetch('/games/mines/balance', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'CSRF-Token': csrfToken,
+                },
+                body: JSON.stringify(data)
+              });
+
+              const result = await response.json();
+              if (result.success) {
+                Swal.fire({
+                  title: 'Congrats!',
+                  text: `You just win and earned ${result.oldBalance}R$!`,
+                  icon: 'success',
+                  confirmButtonText: 'Take my reward!',
+                  background: '#3e09b8',
+                  color: '#fff',
+                  iconColor: '#fff'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    resetBoard();
+                  }
+                });
+                console.log(`Balance actualizado con éxito. Nuevo balance: ${result.newBalance} Robux.`);
+              } else {
+                console.error('Error al actualizar el balance:', result.message);
+                Swal.fire({
+                  title: 'Error!',
+                  text: `${result.message}`,
+                  icon: 'error',
+                  confirmButtonText: 'Ok'
+                })
+              }
+            } catch (error) {
+              console.error('Error en la solicitud de actualización del balance:', error);
+              Swal.fire({
+                title: 'Error!',
+                text: 'An error ocurred!',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                background: '#3e09b8',
+                color: '#fff',
+                iconColor: '#fff'
+              })
+            }
+          }
+
+          function resetBoard() {
+
+            const board = document.getElementById('board');
+            board.innerHTML = '';
+
+
+            safeCellsRevealed = 0;
+            robuxEarned = 0;
+            document.getElementById('robux-earned').textContent = `Robux Earned: ${robuxEarned}`;
+
+            startButton.style.display = 'flex';
+            withdrawButton.style.display = 'none';
+
+          }
+
+          function endGame(isWin) {
+            gameOver = true;
+            withdrawButton.style.display = 'none';
+            startButton.style.display = 'flex';
+
+            if (!gameEndedByWithdraw) {
+              const cells = board.querySelectorAll('.h1-cell');
+              const mineIndices = window.mineIndices || [];
+
+              cells.forEach((cell, index) => {
+                if (mineIndices.includes(index)) {
+                  cell.style.backgroundColor = 'red';
+                  cell.style.backgroundImage = 'url("/public/image/bomb.webp")';
+                  cell.style.backgroundSize = 'cover';
+                } else if (!mineIndices.includes(index) && !cell.textContent) {
+                  cell.style.backgroundColor = 'blueviolet';
+                  cell.textContent = '';
+                  revealCell(cell);
+                }
+              });
+            }
+          }
+        </script>
+        <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+        <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+        <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+        <script>
+          i18next
+            .use(i18nextBrowserLanguageDetector)
+            .init({
+              fallbackLng: 'en',
+              debug: true,
+              resources: {
+                en: {
+                  translation: {
+                    "earned": "R$ Earned"
+                  }
+                },
+                es: {
+                  translation: {
+                    "earned": "R$ Ganados"
+                  }
+                }
+              }
+            }, function (err, t) {
+              // Actualizar las traducciones
+              updateContent();
+            });
+
+          function updateContent() {
+            document.querySelectorAll('[data-translate]').forEach(function (element) {
+              const key = element.getAttribute('data-translate');
+              element.innerHTML = i18next.t(key); // Usamos innerHTML para manejar el contenido HTML
+            });
+          }
+
+          // Cambiar idioma al hacer clic
+          document.getElementById('change-lang-es').addEventListener('click', function () {
+            i18next.changeLanguage('es', updateContent);
+          });
+
+          document.getElementById('change-lang-en').addEventListener('click', function () {
+            i18next.changeLanguage('en', updateContent);
+          });
+        </script>
+</body>
+
+</html>

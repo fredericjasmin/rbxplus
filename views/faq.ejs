@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/faq.css">
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    <link rel="icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    
+</head>
+<body>
+  <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+<div>
+    <div id="container">
+        <h1 id="faqq" data-translate="faqq">Frequently Asked Questions</h1>
+        <div class="question">
+            <h2 class="ttitle" data-translate="robux">Where do Robux come from?</h2>
+            <p class="answer" data-translate="devs">Robux come from developers who provide games. Roblox pays a very low rate for exchange the Robux. So they prefer to give them to users like you instead of exchanging them for real money on Roblox.</p>
+        </div>
+
+        <div class="question">
+            <h2 class="ttitle" data-translate="banned">Will I be banned for using this type of Website?</h2>
+            <p class="answer" data-translate="users">Of course not. Many users will scare you by saying that you will be banned for receiving Robux from third parties, but this only happens if you buy Robux illegally from a prohibited source. Our Robux come from legal games by Roblox developers.</p>
+        </div>
+        
+        <div class="question">
+            <h2 class="ttitle" data-translate="site">How do I get Robux from the site?</h2>
+            <p class="answer" data-translate="completing"></p> <!-- El contenido se llenará dinámicamente -->
+        </div>
+
+        <div class="question">
+            <h2 class="ttitle" data-translate="receive">How long does it take to receive the Robux?</h2>
+            <p class="answer" data-translate="period">It usually takes 3-7 days once you have completed the Robux withdrawal period on the website. You just need to wait for Roblox to release your Robux.</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+    <script>
+       i18next
+         .use(i18nextBrowserLanguageDetector)
+         .init({
+           fallbackLng: 'en',
+           debug: true,
+           resources: {
+             en: {
+               translation: {
+                 "faqq": "Frequently Asked Questions",
+                 "robux": "Where do Robux come from?",
+                 "devs": "Robux come from developers who provide games. Roblox pays a very low rate for exchange the Robux. So they prefer to give them to users like you instead of exchanging them for real money on Roblox.",
+                 "banned": "Will I be banned for using this type of Website?",
+                 "users": "Of course not. Many users will scare you by saying that you will be banned for receiving Robux from third parties, but this only happens if you buy Robux illegally from a prohibited source. Our Robux come from legal games by Roblox developers.",
+                 "site": "How do I get Robux from the site?",
+                 "completing": "You can get Robux by completing surveys in the <a id='ablur' href='/surveys'>surveys</a> section. By simply answering questions in the surveys, you can get free Robux daily. The companies that create these surveys will use the information for market research purposes, so you don't need to worry about your information.",
+                 "receive": "How long does it take to receive the Robux?",
+                 "period": "It usually takes 3-7 days once you have completed the Robux withdrawal period on the website. You just need to wait for Roblox to release your Robux."
+               }
+             },
+             es: {
+               translation: {
+                 "faqq": "Preguntas Frecuentes",
+                 "robux": "De donde vienen los R$?",
+                 "devs": "Los R$ vienen de developers que tienen juegos. Roblox paga una cantidad muy baja a cambio de los Robux. Así que ellos prefieren darlos a usuarios como tú en lugar de intercambiarlos por dinero real en Roblox.",
+                 "banned": "Sere baneado por usar este tipo de sitio?",
+                 "users": "Por supuesto que no. Muchos usuarios te asustaran diciendo que seras baneado por recibir Robux de terceros, pero esto solo ocurre si compras Robux ilegalmente de una fuente prohibida. Nuestros Robux provienen de juegos legales de desarrolladores de Roblox.",
+                 "site": "Como consigo R$ en el sitio?",
+                 "completing": "Puedes conseguir Robux completando encuestas en la sección de <a id='ablur' href='/surveys'>encuestas</a>. Simplemente respondiendo preguntas en las encuestas, puedes conseguir Robux gratis a diario. Las compañias que crean estas encuestas usaran la información para fines de investigacion de mercado, asi que no debes preocuparte por tu informacion.",
+                 "receive": "Cuanto tarda en llegar mis R$?",
+                 "period": "Normalmente tarda entre 3-7 dias una vez que hayas completado el periodo de retiro de Robux en el sitio web. Solo necesitas esperar a que Roblox libere tus Robux."
+               }
+             }
+           }
+         }, function(err, t) {
+           // Actualizar las traducciones
+           updateContent();
+         });
+
+      function updateContent() {
+        document.querySelectorAll('[data-translate]').forEach(function(element) {
+          const key = element.getAttribute('data-translate');
+          element.innerHTML = i18next.t(key); // Usamos innerHTML para manejar el contenido HTML
+        });
+      }
+
+      // Cambiar idioma al hacer clic
+      document.getElementById('change-lang-es').addEventListener('click', function() {
+        i18next.changeLanguage('es', updateContent);
+      });
+
+      document.getElementById('change-lang-en').addEventListener('click', function() {
+        i18next.changeLanguage('en', updateContent);
+      });
+    </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const socket = new WebSocket('ws://rbxplus.com/');
+
+    // Eventos de conexión, cierre y mensajes
+    socket.onopen = () => {
+        console.log('Connected to WebSocket server');
+    };
+
+    socket.onclose = () => {
+        console.log('Disconnected from WebSocket server');
+    };
+
+    socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+    };
+});
+</script>
+</div>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J55SK0YRQ8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J55SK0YRQ8');
+</script>
+</body>
+</html>

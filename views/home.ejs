@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    <link rel="icon" href="/public/image/rrbxplus.png" type="image/png" sizes="800x800">
+    <meta name="description" content="Earn free Robux easily! Complete quick and fun tasks like downloading games or watching videos to start collecting rewards. Get Robux easy for signing up on our website!">
+    <meta property="og:image" content="/public/image/rrbxplus.png">
+    <meta name="image" content="/public/image/rrbxplus.png">
+    <meta name="title" content="RbxPlus: Earn Free Robux In Few Minutes!">
+    <meta name="keywords" content="rbx plus, rbxplus, rbx, roblox, rbxgum, roblox, Earn Free Robux, Free Robux Sites, Fast Robux, Earn Free Robux, Earn Free Robux Easy, Robux Sites, Free Robux Rewards, Free rbx, Earn Free rbx, Robux Website">
+    <meta name="author" content="Rbx Plus" />
+    <meta name="theme-color" content="#7feffd">
+    <meta property="og:description" content="Earn free Robux easily! Complete quick and fun tasks like downloading games or watching videos to start collecting rewards. Get Robux easy for signing up on our website!">
+    <meta property="og:title" content="Earn free ROBUX by completing surveys! No human verification!">
+    <meta property="title" content="RbxPlus: Earn Free Robux In Few Minutes!">
+    <meta name="copyright" content="Rbx Plus" />
+    <meta name="robots" content="index"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    
+</head>
+<body>
+  <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+
+<div id="container">
+   
+  <h1 id="page-title" aria-label="RBXPLUS">RBX<span class="auto-type"></span></h1>
+
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const element = document.querySelector('.auto-type');
+          const text = "PLUS";
+          let index = 0;
+          let typing = true;
+
+          function type() {
+              if (typing) {
+                  if (index < text.length) {
+                      element.textContent += text.charAt(index);
+                      index++;
+                      setTimeout(type, 199);
+                  } else {
+                      typing = false;
+                      setTimeout(type, 2000);
+                  }
+              } else {
+                  if (index > 0) {
+                      element.textContent = text.substring(0, index - 1);
+                      index--;
+                      setTimeout(type, 199);
+                  } else {
+                      typing = true;
+                      setTimeout(type, 500);
+                  }
+              }
+          }
+
+          type();
+      });
+  </script>
+    <img src="/public/image/clouds.png" id="clouds" alt="clouds">
+</div>
+<div id="start">
+  <button id="buttonss">Start Now</button>
+</div>
+
+
+<script>
+  window.onload = function() {
+    Swal.fire({
+      title: 'Welcome',
+      html: 'RbxGum recently moved to RbxPlus, you can have more information in <a href="https://discord.com/invite/7BCq5z9V2d" target="_blank" style="color: #3085d6; text-decoration: none;">Discord</a>',
+      icon: 'info',
+      showCloseButton: true
+    });
+  }
+</script>
+
+<script>
+  document.getElementById("start").addEventListener("click", function() {
+    window.location.href = "/login";
+  });
+
+  document.getElementById("buttonss").addEventListener("click", function() {
+    window.location.href = "/login";
+  });
+</script>
+
+
+ <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+ <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+ <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+ <script>
+    i18next
+      .use(i18nextBrowserLanguageDetector)
+      .init({
+        fallbackLng: 'en',
+        debug: true,
+        resources: {
+          en: {
+            translation: {
+              "start": "Start Now",
+            }
+          },
+          es: {
+            translation: {
+              "start": "Empezar Ya",
+            }
+          }
+        }
+      }, function(err, t) {
+        // Actualizar las traducciones
+        updateContent();
+      });
+
+   function updateContent() {
+     document.querySelectorAll('[data-translate]').forEach(function(element) {
+       const key = element.getAttribute('data-translate');
+       element.textContent = i18next.t(key);
+     });
+   }
+
+   // Cambiar idioma al hacer clic
+   document.getElementById('change-lang-es').addEventListener('click', function() {
+     i18next.changeLanguage('es', updateContent);
+   });
+
+   document.getElementById('change-lang-en').addEventListener('click', function() {
+     i18next.changeLanguage('en', updateContent);
+   });
+ </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const socket = new WebSocket('ws://rbxplus.com/');
+
+    // Eventos de conexión, cierre y mensajes
+    socket.onopen = () => {
+        console.log('Connected to WebSocket server');
+    };
+
+    socket.onclose = () => {
+        console.log('Disconnected from WebSocket server');
+    };
+
+    socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+    };
+});
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J55SK0YRQ8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J55SK0YRQ8');
+</script>
+</body>
+</html>

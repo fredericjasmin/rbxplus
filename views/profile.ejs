@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RbxPlus: Earn Free Robux In Few Minutes!</title>
+    <link rel="stylesheet" href="/public/profile.css">
+    <link rel="shortcut icon" href="/public/image/rrbxplus.png" type="image/x-icon">
+    <link rel="icon" href="/public/image/rrbxplus.png" type="image/png" sizes="800x800">
+    <meta name="description"
+        content="Earn free Robux easily! Complete quick and fun tasks like downloading games or watching videos to start collecting rewards. Get Robux easy for signing up on our website!">
+    <meta property="og:image" content="/public/image/rrbxplus.png">
+    <meta name="title" content="RbxPlus: Earn Free Robux In Few Minutes!">
+    <meta name="keywords" content="rbx plus, rbxplus, rbx, roblox, rbxgum, roblox, Earn Free Robux, Free Robux Sites, Fast Robux, Earn Free Robux, Earn Free Robux Easy, Robux Sites, Free Robux Rewards, Free rbx, Earn Free rbx, Robux Website">
+    <meta name="author" content="Rbx Plus" />
+    <meta name="theme-color" content="#7feffd">
+    <meta property="og:description"
+        content="Earn free Robux easily! Complete quick and fun tasks like downloading games or watching videos to start collecting rewards. Get Robux easy for signing up on our website!">
+    <meta property="og:title" content="RbxPlus: Earn Free Robux In Few Minutes!">
+    <meta name="copyright" content="Rbx Plus" />
+    <meta name="robots" content="index" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8454421393168031"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <%- include('partials/preload') %>
+    <%- include('partials/navbar') %>
+        <div id="containerProfile">
+            <div id="firstContent">
+                <div id="imageAvatar">
+                    <img id="imguserid" src="<%- imageUrl %>" alt="imguser">
+                </div>
+
+                <div id="datauser">
+                    <h1 id="welcomeText">Welcome <span id="auto-type" class="auto-type"></span></h1>
+
+                    <p id="balance" data-translate="balance">Balance: <%- points %> R$</p>
+                    <button data-translate="logout" id="logoutbut" onclick="window.location.href = '/logout'">
+                    </button>
+                </div>
+            </div>
+
+            <%- include('partials/notifications') %>
+
+                <div id="rbxpaymentsui">
+                    <h2 id="tittlew" data-translate="recently">Recently Withdrawals</h2>
+                    <% if (transactions && transactions.length> 0) { %>
+                        <% transactions.forEach(transaction=> { %>
+                            <div id="transaction">
+                                <h4 id="fecha">
+                                    <%= dayjs(transaction.date).format('DD/MM/YYYY') %>
+                                </h4>
+                                <h4 id="cantidad"><%- transaction.robuxAmount %> R$</h4>
+                                <h4 id="estado"><%- transaction.status==='pending' ? 'Pending' : 'Completed' %></h4>
+                            </div>
+                            <% }) %>
+                                <% } else { %>
+                                    <div id="nofound">
+                                        <p id="notransactions" data-translate="transactions">No transactions found.</p>
+                                    </div>
+                                    <% } %>
+                </div>
+
+
+
+                <div id="promocodeinterface">
+                    <form method="post" action="/profile">
+                        <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                        <h2 id="promottitle" data-translate="promocode">Enter A Promocode For Free R$</h2>
+                        <input type="text" required placeholder="Write your promocode" name="code"> <br>
+                        <button type="submit" id="buttoncode">OK</button>
+                    </form>
+                </div>
+
+
+                <div id="referralui">
+                    <h2 id="referraltittle" data-translate="referraltittle"> Share this link and earn R$ when your
+                        friends complete offers</h2>
+                    <div id="promocodeplace">
+                        <h5 id="texturl" data-copy-text="https://rbxplus.com/ref/<%- referralCode %>">
+                            <a href="#" id="referralLink" data-url="https://rbxplus.com/ref/<%- referralCode %>">https://rbxplus.com/ref/<%- referralCode %></a>
+                        </h5>
+                    </div>
+
+                    <div id="statisticsreferral">
+                        <div id="usersreferred">
+                            <h4 data-translate="usersreferred">Users Invited:</h4>
+                            <h4><%- totalReferredUsers %></h4>
+                        </div>
+                        <div id="rbxearnedreferral">
+                            <h4 data-translate="totalearned">Total earned:</h4>
+                            <h4><%- referralEarned %> R$</h4>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+
+        <!-- i18next y scripts de traducción -->
+        <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+        <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+        <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+        <script>
+            i18next
+                .use(i18nextBrowserLanguageDetector)
+                .init({
+                    fallbackLng: 'en',
+                    debug: true,
+                    resources: {
+                        en: {
+                            translation: {
+                                "balance": "Balance: {{balance}} R$",
+                                "logout": "<i class='lni lni-exit'></i> Logout",
+                                "recently": "Recently Withdrawals",
+                                "transactions": "No transactions found.",
+                                "promocode": "Enter A Promocode For Free R$",
+                                "referraltittle": "Share this link and earn R$ when your friends complete offers",
+                                "usersreferred": "Users invited:",
+                                "totalearned": "Total earned:"
+                            }
+                        },
+                        es: {
+                            translation: {
+                                "balance": "Saldo: {{balance}} R$",
+                                "logout": "<i class='lni lni-exit'></i> Salir",
+                                "recently": "Retiros Recientes",
+                                "transactions": "Sin transacciones.",
+                                "promocode": "Ingrese Su Codigo de R$",
+                                "referraltittle": "Comparte el link y gana R$ cuando tus amigos completen ofertas",
+                                "usersreferred": "Invitaciones:",
+                                "totalearned": "Total ganado:"
+                            }
+                        }
+                    }
+                }, function (err, t) {
+                    updateContent();
+                });
+
+            function updateContent() {
+                const username = "<%- user.username %>";
+                const balance = "<%- points %>";
+                document.querySelectorAll('[data-translate]').forEach(function (element) {
+                    const key = element.getAttribute('data-translate');
+                    element.innerHTML = i18next.t(key, { username: username, balance: balance });
+                });
+            }
+
+            // Cambiar idioma al hacer clic
+            document.getElementById('change-lang-es').addEventListener('click', function () {
+                i18next.changeLanguage('es', updateContent);
+            });
+
+            document.getElementById('change-lang-en').addEventListener('click', function () {
+                i18next.changeLanguage('en', updateContent);
+            });
+
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const referralLink = document.getElementById('referralLink');
+
+            referralLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                const url = referralLink.getAttribute('data-url');
+                navigator.clipboard.writeText(url)
+            });
+        });
+        </script>
+        
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const element = document.querySelector('.auto-type')
+                const text = "<%- user.username %>"
+                let index = 0;
+                let typing = true
+
+                function type() {
+                    if (typing) {
+                        if (index < text.length) {
+                            element.textContent += text.charAt(index)
+                            index++;
+                            setTimeout(type, 199)
+                        } else {
+                            typing = false;
+                            setTimeout(type, 2000)
+                        }
+                    } else {
+                        if (index > 0) {
+                            element.textContent = text.substring(0, index - 1)
+                            index--;
+                            setTimeout(type, 199)
+                        } else {
+                            typing = true;
+                            setTimeout(type, 500)
+                        }
+                    }
+                }
+
+                type()
+            })
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const socket = new WebSocket('ws://rbxplus.com/');
+
+                // Eventos de conexión, cierre y mensajes
+                socket.onopen = () => {
+                    console.log('Connected to WebSocket server');
+                };
+
+                socket.onclose = () => {
+                    console.log('Disconnected from WebSocket server');
+                };
+
+                socket.onerror = (error) => {
+                    console.error('WebSocket error:', error);
+                };
+            });
+        </script>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J55SK0YRQ8"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-J55SK0YRQ8');
+        </script>
+</body>
+
+</html>
